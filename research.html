@@ -14,9 +14,8 @@
         <a href="/" class="nav-brand"><span class="brand-icon">◈</span> Agentic Sciences</a>
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="research.html" class="active">Research</a>
             <a href="architecture.html">Architecture</a>
-            <a href="outputs.html">Outputs</a>
+            <a href="research.html" class="active">Research</a>
         </div>
     </div>
 </nav>
@@ -24,86 +23,135 @@
 <div class="page-header">
     <div class="container">
         <h1>Research</h1>
-        <p>Academic research produced by our autonomous AI agent pipeline</p>
+        <p>Projects, papers, figures, videos, and podcasts</p>
     </div>
 </div>
 
+<!-- ==================== Project 1: Perpetual Futures ==================== -->
 <section class="section">
     <div class="container">
-        <div class="research-list">
+        <div class="research-card-large">
+            <div class="research-status active">Active Research</div>
+            <h3 style="font-size:28px;margin-bottom:4px">Perpetual Futures and Market Quality</h3>
+            <p style="font-size:14px;color:#64748b;margin-bottom:12px">Cryptocurrency Microstructure · 5,213 trading days · 3 exchanges · 13 pairs</p>
+            <p style="font-size:15px;color:#94a3b8;line-height:1.8;margin-bottom:24px">How do perpetual futures contracts affect spot market quality? We analyze tick-level order book and trade data across Binance, Huobi, and OKEx. Key findings: quoted spreads of 0.03% mask effective spreads of ~1%. Binance depth ($14.8M) dwarfs Huobi ($1.6M) by 9x. Huobi's 2021 contract termination provides a natural experiment for causal identification via DiD with synthetic controls.</p>
 
-            <div class="research-item">
-                <div class="research-status active">Active Research</div>
-                <h3>Perpetual Futures and Market Quality</h3>
-                <div class="meta">Cryptocurrency Microstructure · 2024–2026</div>
-                <p class="desc">How do perpetual futures contracts affect spot market quality? We analyze tick-level order book and trade data across Binance, Huobi, and OKEx for 13 trading pairs over 5,213 trading days. Key findings: quoted spreads average 0.03% but effective spreads reach ~1%, revealing significant hidden execution costs. Binance depth ($14.8M) dwarfs Huobi ($1.6M) by nearly 10x, creating a natural experiment for causal identification using Huobi's 2021 perpetual contract termination.</p>
-                <div class="research-meta">
-                    <span>📈 5,213 trading days</span>
-                    <span>🏦 3 exchanges</span>
-                    <span>💱 13 pairs</span>
-                    <span>📊 Kaiko tick-level data</span>
-                </div>
-                <div class="research-links">
-                    <a href="assets/papers/perpetual_futures_market_quality.pdf" class="btn btn-sm">📄 Paper (PDF)</a>
-                    <a href="assets/slides/presentation_slides.pdf" class="btn btn-sm">📑 Slides</a>
-                    <a href="outputs.html" class="btn btn-sm">🎬 Video Presentation</a>
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">📄 Documents</h4>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+                <a href="assets/papers/perpetual_futures_market_quality.pdf" class="btn btn-sm">Working Paper</a>
+                <a href="assets/papers/perpetual_futures_figures.pdf" class="btn btn-sm">Figure Collection (15 figs)</a>
+                <a href="assets/slides/presentation_slides.pdf" class="btn btn-sm">Presentation Slides</a>
+            </div>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">🎬 Video</h4>
+            <div class="output-grid" style="margin-bottom:20px">
+                <div class="output-item">
+                    <h3>Paper Presentation</h3>
+                    <p style="font-size:12px;color:#64748b">Agentic Sciences · 1:00</p>
+                    <video controls style="width:100%;border-radius:8px;margin-top:8px;background:#000">
+                        <source src="assets/videos/presentation_en.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 
-            <div class="research-item">
-                <div class="research-status active">Active Research</div>
-                <h3>Polymarket Microstructure</h3>
-                <div class="meta">Prediction Markets · 2024–2026</div>
-                <p class="desc">Microstructure analysis of Polymarket's CLOB-based prediction market. Examining order flow patterns, liquidity provision, and price formation around major political events including the 2024 US Presidential Election.</p>
-                <div class="research-meta">
-                    <span>🗳️ Event-driven</span>
-                    <span>📊 CLOB + Gamma APIs</span>
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">📊 Selected Figures</h4>
+            <div class="fig-gallery">
+                <div class="fig-item">
+                    <img src="assets/figures/microstructure_metrics.png" alt="Microstructure">
+                    <div class="fig-cap">Microstructure Metrics Summary</div>
                 </div>
-                <div class="research-links">
-                    <a href="outputs.html" class="btn btn-sm">📊 Figures</a>
+                <div class="fig-item">
+                    <img src="assets/figures/exchange_comparison.png" alt="Exchange Comparison">
+                    <div class="fig-cap">Exchange Comparison</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/event_study_parallel_trends.png" alt="Event Study">
+                    <div class="fig-cap">Event Study: Parallel Trends</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/spread_ratio_heatmap.png" alt="Spread Heatmap">
+                    <div class="fig-cap">Spread Ratio Heatmap</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/binance_fr_micro_analysis.png" alt="Binance FR">
+                    <div class="fig-cap">Binance Funding Rate</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/descriptive_overview.png" alt="Descriptive">
+                    <div class="fig-cap">Descriptive Overview</div>
                 </div>
             </div>
-
-            <div class="research-item">
-                <h3>Cross-Market Predictability</h3>
-                <div class="meta">Crypto–Equity Linkages · Exploratory</div>
-                <p class="desc">Can cryptocurrency market signals predict traditional asset returns? Using Kaiko crypto data and TAQ/WRDS equity data, we examine dynamic correlations, Granger causality, and spillover effects between crypto and US equity markets.</p>
-                <div class="research-meta">
-                    <span>🔗 Cross-asset</span>
-                    <span>📊 Kaiko + TAQ + WRDS</span>
-                </div>
-            </div>
-
-            <div class="research-item">
-                <h3>Retail Trading Networks</h3>
-                <div class="meta">Market Microstructure · Completed</div>
-                <p class="desc">Network analysis of retail trading patterns and their impact on price formation and market quality. Job market paper.</p>
-            </div>
-
         </div>
     </div>
 </section>
 
-<!-- Key Figures -->
+<!-- ==================== Project 2: Prediction Markets ==================== -->
 <section class="section section-alt">
     <div class="container">
-        <h2 class="section-title">Selected Figures</h2>
-        <div class="fig-gallery">
-            <div class="fig-item">
-                <img src="assets/figures/election_definitive.png" alt="Election Analysis">
-                <div class="fig-cap">Polymarket: 2024 Election Event Study</div>
+        <div class="research-card-large">
+            <div class="research-status active">Active Research</div>
+            <h3 style="font-size:28px;margin-bottom:4px">Prediction Market Microstructure</h3>
+            <p style="font-size:14px;color:#64748b;margin-bottom:12px">Polymarket CLOB · 2024 Election · Hyperliquid DEX</p>
+            <p style="font-size:15px;color:#94a3b8;line-height:1.8;margin-bottom:24px">Microstructure analysis of Polymarket's CLOB-based prediction market. Examining order flow patterns, liquidity provision, and price formation around the 2024 US Presidential Election. Comparative analysis with Hyperliquid, a leading decentralized perpetual exchange.</p>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">📄 Documents</h4>
+            <div style="margin-bottom:20px">
+                <a href="assets/papers/prediction_market_microstructure.pdf" class="btn btn-sm">Research Document</a>
             </div>
-            <div class="fig-item">
-                <img src="assets/figures/polymarket_overview.png" alt="Polymarket Overview">
-                <div class="fig-cap">Polymarket Microstructure Overview</div>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">🎬 Video</h4>
+            <div class="output-grid" style="margin-bottom:20px">
+                <div class="output-item">
+                    <h3>Project Overview</h3>
+                    <p style="font-size:12px;color:#64748b">Agentic Sciences · 0:30</p>
+                    <video controls style="width:100%;border-radius:8px;margin-top:8px;background:#000">
+                        <source src="assets/videos/polymarket.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
-            <div class="fig-item">
-                <img src="assets/figures/hyperliquid_analysis.png" alt="Hyperliquid Analysis">
-                <div class="fig-cap">Hyperliquid DEX Analysis</div>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">📊 Figures</h4>
+            <div class="fig-gallery">
+                <div class="fig-item">
+                    <img src="assets/figures/election_definitive.png" alt="Election">
+                    <div class="fig-cap">2024 Election Event Study</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/polymarket_overview.png" alt="Polymarket">
+                    <div class="fig-cap">Polymarket Overview</div>
+                </div>
+                <div class="fig-item">
+                    <img src="assets/figures/hyperliquid_analysis.png" alt="Hyperliquid">
+                    <div class="fig-cap">Hyperliquid DEX Analysis</div>
+                </div>
             </div>
-            <div class="fig-item">
-                <img src="assets/figures/binance_fr_micro_analysis.png" alt="Binance Funding Rate">
-                <div class="fig-cap">Binance Funding Rate Microstructure</div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== Project 3: Cross-Market ==================== -->
+<section class="section">
+    <div class="container">
+        <div class="research-card-large">
+            <div class="research-status" style="background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)">Exploratory</div>
+            <h3 style="font-size:28px;margin-bottom:4px">Cross-Market Predictability</h3>
+            <p style="font-size:14px;color:#64748b;margin-bottom:12px">Crypto → Equity signals · Kaiko + TAQ + WRDS · 126TB cross-market data</p>
+            <p style="font-size:15px;color:#94a3b8;line-height:1.8;margin-bottom:24px">Can cryptocurrency market signals predict traditional asset returns? Combining Kaiko crypto data with NYSE TAQ millisecond equity data and 272 WRDS databases to examine dynamic correlations, Granger causality, and spillover effects between crypto and US equity markets.</p>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">📄 Documents</h4>
+            <div style="margin-bottom:20px">
+                <a href="assets/papers/cross_market_predictability.pdf" class="btn btn-sm">Research Document</a>
+            </div>
+
+            <h4 style="color:#60a5fa;font-size:15px;margin:20px 0 12px">🎬 Video</h4>
+            <div class="output-grid" style="margin-bottom:20px">
+                <div class="output-item">
+                    <h3>Project Overview</h3>
+                    <p style="font-size:12px;color:#64748b">Agentic Sciences · 0:35</p>
+                    <video controls style="width:100%;border-radius:8px;margin-top:8px;background:#000">
+                        <source src="assets/videos/crossmarket.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
     </div>
