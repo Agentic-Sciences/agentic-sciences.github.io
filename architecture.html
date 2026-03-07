@@ -33,20 +33,20 @@
         <!-- Key Stats -->
         <div class="hero-stats" style="margin-bottom:48px">
             <div class="stat">
-                <div class="stat-number">153TB</div>
+                <div class="stat-number">2.9PB</div>
                 <div class="stat-label">Total Storage</div>
             </div>
             <div class="stat">
                 <div class="stat-number">126TB</div>
-                <div class="stat-label">Data On-Premise</div>
+                <div class="stat-label">Financial Data</div>
             </div>
             <div class="stat">
-                <div class="stat-number">112</div>
-                <div class="stat-label">CPU Threads</div>
+                <div class="stat-number">600+</div>
+                <div class="stat-label">CPU Cores</div>
             </div>
             <div class="stat">
-                <div class="stat-number">754GB</div>
-                <div class="stat-label">RAM</div>
+                <div class="stat-number">H100</div>
+                <div class="stat-label">GPU Access</div>
             </div>
         </div>
 
@@ -57,39 +57,67 @@
                                 │
           ┌─────────┬───────────┼───────────┬──────────┐
           ▼         ▼           ▼           ▼          ▼
-      research3  research1   Gemini    30+ APIs    Memory
-      (local)    (SSH)       Pro+Flash              System
-          │         │
-          ▼         ▼
-   ┌──────────┐ ┌──────────────────────────────┐
-   │  Kaiko   │ │  TAQ · DTAQ · WRDS · NASDAQ  │
-   │  11TB    │ │  CRSP · Compustat · IBES      │
-   │  64 exch │ │  OptionMetrics · TRACE        │
-   │  10yr OB │ │  RavenPack · CapitalIQ        │
-   │  + trades│ │  Factset · MSCI ESG           │
-   └──────────┘ │  Numerator · ATTOM · GovPX    │
-                └──────────────────────────────┘</div>
+      research3  research1   BioHPC    30+ APIs    Memory
+      (always-on)(SSH)       (SLURM)               System
+          │         │           │
+          ▼         ▼           ▼
+   ┌──────────┐ ┌────────┐ ┌──────────────────────┐
+   │  Kaiko   │ │TAQ 14TB│ │  12 ECCO nodes       │
+   │  11TB    │ │DTAQ    │ │  8 GPU nodes (H100+) │
+   │  64 exch │ │NASDAQ  │ │  2.7PB Lustre FS     │
+   │  10yr OB │ │WRDS    │ │  500+ CPU cores      │
+   └──────────┘ └────────┘ └──────────────────────┘</div>
 
         <!-- Compute Infrastructure -->
         <h2 class="section-title" style="margin-bottom:32px">Compute Infrastructure</h2>
-        <p class="section-desc">Cornell BioHPC high-performance computing cluster</p>
+        <p class="section-desc">Two independent clusters at Cornell: dedicated JCB research servers + BioHPC HPC cluster</p>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">JCB Research Servers (Always-On)</h3>
         <div class="layer-grid">
             <div class="layer">
                 <h4>Research Server 3 (Primary)</h4>
-                <p><strong>jcb-research3.business.cornell.edu</strong><br>
-                2× Intel Xeon Gold 6258R (2.7GHz, 28 cores each)<br>
-                112 threads · 754GB RAM<br>
-                153TB total storage across multiple arrays<br>
-                Direct access to all on-premise datasets<br>
-                AI agent runs here 24/7</p>
+                <p>2× Intel Xeon Gold 6258R (28c each) · 112 threads · 754GB RAM · 153TB storage<br>
+                Direct access to all on-premise financial datasets (Kaiko, TAQ, NASDAQ, WRDS).<br>
+                AI agent runs here 24/7. Autonomous research pipeline.</p>
             </div>
             <div class="layer">
                 <h4>Research Server 1 (Secondary)</h4>
-                <p><strong>jcb-research1.business.cornell.edu</strong><br>
-                Linked via SSH (Kerberos auth)<br>
-                TAQ/DTAQ high-frequency equity data<br>
-                Additional WRDS mirrors and NASDAQ feeds<br>
-                Numerator consumer data</p>
+                <p>Linked via SSH (Kerberos auth)<br>
+                TAQ/DTAQ high-frequency equity data · WRDS mirrors · NASDAQ feeds · Numerator consumer data</p>
+            </div>
+        </div>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Cornell BioHPC Cluster (On-Demand)</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>ECCO Compute Nodes (12 nodes)</h4>
+                <p>SLURM-managed partitions with 500+ CPU cores:<br>
+                <strong>Fast partition</strong> — 6 nodes, up to 112 cores / 256GB RAM each<br>
+                <strong>Slow partition</strong> — 3 nodes, 28–56 cores / 128–251GB RAM<br>
+                <strong>Large-memory</strong> — 1 node, 32 cores / <strong>1TB RAM</strong><br>
+                <strong>Interactive</strong> — 2 nodes, 32 cores / 231–257GB RAM</p>
+            </div>
+            <div class="layer">
+                <h4>GPU Nodes (Reservable)</h4>
+                <p>8 GPU-equipped servers via BioHPC reservation system:<br>
+                <strong>2× NVIDIA H100</strong> — Top-tier for LLM inference &amp; fine-tuning<br>
+                <strong>2× NVIDIA A100</strong> — Large-scale model training<br>
+                <strong>2× NVIDIA A40</strong> · <strong>2× A6000</strong> — Research workloads<br>
+                <strong>P100 / T4</strong> — Lightweight GPU tasks<br>
+                Docker &amp; Singularity containers supported</p>
+            </div>
+            <div class="layer">
+                <h4>Lustre Parallel Filesystem</h4>
+                <p><strong>lustre1</strong> — 755TB (541TB used)<br>
+                <strong>lustre2</strong> — 2.0PB (1.3PB used)<br>
+                High-throughput parallel I/O for large-scale data processing. Shared across all compute nodes.</p>
+            </div>
+            <div class="layer">
+                <h4>Software Stack</h4>
+                <p>Python 3.12 · Pandas · NumPy · SciPy · SLURM job scheduler<br>
+                Docker &amp; Singularity for containerized ML workflows<br>
+                PyTorch / TensorFlow available via containers<br>
+                239 reservable machines across all categories</p>
             </div>
         </div>
 
