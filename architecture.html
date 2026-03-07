@@ -31,70 +31,191 @@
 <section class="section">
     <div class="container">
 
-        <div class="arch-diagram-box">📱 Voice / Text Command (Telegram)
-        │
-        ▼
-🤖 Claude Opus 4 — Primary Agent / Orchestrator
-        │
-        ├──── 🖥️  Research Server 1 (112 threads, 754GB RAM)
-        │         └── Kaiko: 64 exchanges, tick-level OB + trades (10yr)
-        │
-        ├──── 🖥️  Research Server 2 (via SSH)
-        │         └── TAQ · WRDS (272 DBs) · NASDAQ · Numerator
-        │
-        ├──── ☁️  Cloud Server — Data collection + automation
-        │
-        ├──── 🧠  Gemini 3.1 Pro — Paper writing, deep reasoning
-        ├──── ⚡  Gemini Flash — Audio/video transcription (10x Whisper)
-        │
-        ├──── 📊  30+ Financial Data APIs
-        │         ├── Crypto:    Binance · Hyperliquid · Polymarket · DefiLlama
-        │         ├── Equities:  Yahoo Finance · Twelve Data · Alpha Vantage
-        │         ├── Macro:     FRED · World Bank · ECB
-        │         └── Options:   Deribit · CBOE
-        │
-        └──── 📝  Stateful Memory System (error logs, lessons learned)</div>
-
-        <h2 class="section-title" style="margin-bottom:32px">Data Layer</h2>
-        <div class="layer-grid">
-            <div class="layer">
-                <h4>Kaiko Consolidated Data</h4>
-                <p>10 years of tick-level order book snapshots (up to 5,000 bid/ask levels) and raw trades across 64 cryptocurrency exchanges. Spot, perpetual, quarterly futures, and options.</p>
+        <!-- Key Stats -->
+        <div class="hero-stats" style="margin-bottom:48px">
+            <div class="stat">
+                <div class="stat-number">153TB</div>
+                <div class="stat-label">Total Storage</div>
             </div>
-            <div class="layer">
-                <h4>TAQ (Trade and Quote)</h4>
-                <p>NYSE TAQ millisecond-resolution data for all US-listed equities. Intraday microstructure, price impact estimation, cross-market event studies.</p>
+            <div class="stat">
+                <div class="stat-number">126TB</div>
+                <div class="stat-label">Data On-Premise</div>
             </div>
-            <div class="layer">
-                <h4>WRDS Academic Databases</h4>
-                <p>Direct PostgreSQL to 272 databases: CRSP, Compustat, IBES, Thomson Reuters, RavenPack, and more. Full spectrum of financial and economic data.</p>
+            <div class="stat">
+                <div class="stat-number">112</div>
+                <div class="stat-label">CPU Threads</div>
             </div>
-            <div class="layer">
-                <h4>Real-Time Market Data</h4>
-                <p>Live connections to Binance, Hyperliquid (REST + WebSocket + S3), Polymarket (Gamma + CLOB), and 25+ additional providers across all asset classes.</p>
+            <div class="stat">
+                <div class="stat-number">754GB</div>
+                <div class="stat-label">RAM</div>
             </div>
         </div>
 
+        <div class="arch-diagram-box">                         Telegram (Voice / Text)
+                                │
+                                ▼
+                   Claude Opus 4 — Orchestrator
+                                │
+          ┌─────────┬───────────┼───────────┬──────────┐
+          ▼         ▼           ▼           ▼          ▼
+      research3  research1   Gemini    30+ APIs    Memory
+      (local)    (SSH)       Pro+Flash              System
+          │         │
+          ▼         ▼
+   ┌──────────┐ ┌──────────────────────────────┐
+   │  Kaiko   │ │  TAQ · DTAQ · WRDS · NASDAQ  │
+   │  11TB    │ │  CRSP · Compustat · IBES      │
+   │  64 exch │ │  OptionMetrics · TRACE        │
+   │  10yr OB │ │  RavenPack · CapitalIQ        │
+   │  + trades│ │  Factset · MSCI ESG           │
+   └──────────┘ │  Numerator · ATTOM · GovPX    │
+                └──────────────────────────────┘</div>
+
+        <!-- Compute Infrastructure -->
+        <h2 class="section-title" style="margin-bottom:32px">Compute Infrastructure</h2>
+        <p class="section-desc">Cornell BioHPC high-performance computing cluster</p>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>Research Server 3 (Primary)</h4>
+                <p><strong>jcb-research3.business.cornell.edu</strong><br>
+                2× Intel Xeon Gold 6258R (2.7GHz, 28 cores each)<br>
+                112 threads · 754GB RAM<br>
+                153TB total storage across multiple arrays<br>
+                Direct access to all on-premise datasets<br>
+                AI agent runs here 24/7</p>
+            </div>
+            <div class="layer">
+                <h4>Research Server 1 (Secondary)</h4>
+                <p><strong>jcb-research1.business.cornell.edu</strong><br>
+                Linked via SSH (Kerberos auth)<br>
+                TAQ/DTAQ high-frequency equity data<br>
+                Additional WRDS mirrors and NASDAQ feeds<br>
+                Numerator consumer data</p>
+            </div>
+        </div>
+
+        <!-- Data Layer -->
+        <h2 class="section-title" style="margin-bottom:32px">Data Layer — On-Premise (126TB)</h2>
+        <p class="section-desc">All data stored locally for zero-latency access. No cloud data egress costs.</p>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Cryptocurrency Data</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>Kaiko Consolidated (11TB)</h4>
+                <p>Tick-level order book snapshots (up to 5,000 bid/ask levels) and raw trades across <strong>64 cryptocurrency exchanges</strong>. 10 years of history. Covers spot, perpetual futures, quarterly futures, and options markets.</p>
+            </div>
+            <div class="layer">
+                <h4>Kaiko EQ Versions (v3/v4)</h4>
+                <p>Enhanced quality datasets with standardized symbology, cross-exchange normalization, and derived metrics. Multiple versions for backward compatibility.</p>
+            </div>
+        </div>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">US Equity High-Frequency Data</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>NYSE TAQ (14TB)</h4>
+                <p>Millisecond-resolution trades and quotes for <strong>all US-listed equities</strong>. Daily TAQ and intraday TAQ (DTAQ). The gold standard for equity microstructure research. NBBO, trades, quotes with exchange identifiers.</p>
+            </div>
+            <div class="layer">
+                <h4>NASDAQ ITCH (12TB)</h4>
+                <p>NASDAQ TotalView-ITCH feed data. Multiple versions (v2–v5) spanning full history. Order-level data: add, execute, cancel, replace messages. Enables order-flow and queue-position analysis.</p>
+            </div>
+        </div>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">WRDS Academic Databases</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>WRDS Cloud (272 databases)</h4>
+                <p>Direct PostgreSQL connection to the full WRDS suite. Real-time queries against the latest data without local storage constraints.</p>
+            </div>
+            <div class="layer">
+                <h4>WRDS On-Premise Mirror (12TB)</h4>
+                <p>Local mirrors of high-frequency WRDS data. Order book snapshots at large/medium/small tick sizes (ob_l, ob_m, ob_s). Eliminates query latency for intensive computations.</p>
+            </div>
+        </div>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Specialized Databases (6TB on-premise)</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>CRSP & Compustat</h4>
+                <p>Complete US stock returns (CRSP) and financial statements (Compustat). Linked CRSP-Compustat merged dataset. The backbone of empirical finance.</p>
+            </div>
+            <div class="layer">
+                <h4>IBES & Thomson Reuters</h4>
+                <p>Analyst earnings estimates, recommendations, and target prices. Institutional holdings (S12/S34). Essential for event studies and analyst behavior research.</p>
+            </div>
+            <div class="layer">
+                <h4>OptionMetrics</h4>
+                <p>US equity options: implied volatility surfaces, Greeks, open interest, volume. Enables volatility research and options microstructure analysis.</p>
+            </div>
+            <div class="layer">
+                <h4>TRACE (Fixed Income)</h4>
+                <p>Corporate bond transaction data from FINRA. Trade prices, volumes, and dealer identifiers. The definitive source for bond market microstructure.</p>
+            </div>
+            <div class="layer">
+                <h4>RavenPack (News Analytics)</h4>
+                <p>Real-time news sentiment scores, event detection, and entity mapping. Covers 300,000+ entities across global news sources. Links news events to market movements.</p>
+            </div>
+            <div class="layer">
+                <h4>Capital IQ & Factset</h4>
+                <p>Company fundamentals, M&A transactions, private company data (CapitalIQ). Multi-asset class analytics, ownership data, supply chain mappings (Factset).</p>
+            </div>
+            <div class="layer">
+                <h4>MSCI ESG & GMI Ratings</h4>
+                <p>Environmental, social, and governance scores. Board composition, executive compensation, shareholder activism data. ESG integration research.</p>
+            </div>
+            <div class="layer">
+                <h4>Additional Datasets</h4>
+                <p><strong>GovPX</strong> — US Treasury market quotes<br>
+                <strong>ATTOM</strong> — Real estate property data<br>
+                <strong>Numerator</strong> — Consumer purchase behavior<br>
+                <strong>Mergent</strong> — Fixed income securities<br>
+                <strong>ISSM</strong> — Intraday stock/bond data<br>
+                <strong>DealScan</strong> — Syndicated loan market<br>
+                <strong>Fama-French</strong> — Factor returns library<br>
+                <strong>MSRB</strong> — Municipal bond trades<br>
+                <strong>Incentive Lab</strong> — Executive compensation<br>
+                <strong>Insider Trading</strong> — SEC Form 4 filings<br>
+                <strong>Audit Analytics</strong> — Auditor data<br>
+                <strong>ETF Global</strong> — ETF holdings & flows<br>
+                <strong>CUSIP</strong> — Security identifier master</p>
+            </div>
+        </div>
+
+        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Real-Time APIs (30+)</h3>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>Crypto Markets</h4>
+                <p>Binance (data.binance.vision) · Hyperliquid (REST + WebSocket + S3 archive) · Polymarket (Gamma + CLOB) · DefiLlama · CoinGecko · Deribit options</p>
+            </div>
+            <div class="layer">
+                <h4>Traditional Markets</h4>
+                <p>Yahoo Finance · Twelve Data · Alpha Vantage · FRED (macro) · World Bank · ECB · CBOE</p>
+            </div>
+        </div>
+
+        <!-- AI Model Layer -->
         <h2 class="section-title" style="margin-bottom:32px">AI Model Layer</h2>
         <div class="layer-grid">
             <div class="layer">
                 <h4>Claude Opus 4 — Orchestrator</h4>
-                <p>Manages the full research lifecycle: data exploration → hypothesis → code → analysis → figures → paper → iteration. Stateful memory across sessions.</p>
+                <p>Primary agent managing the full research lifecycle: data exploration → hypothesis → code → analysis → figures → paper → iteration. Stateful memory across sessions. Voice-controlled via Telegram.</p>
             </div>
             <div class="layer">
                 <h4>Gemini 3.1 Pro — Deep Reasoning</h4>
-                <p>Long-form academic writing, complex analytical reasoning, cross-model review. Publication-quality prose with proper econometric methodology.</p>
+                <p>Long-form academic writing, complex analytical reasoning, cross-model review. Publication-quality prose with proper econometric methodology discussions.</p>
             </div>
             <div class="layer">
                 <h4>Gemini Flash — Multimodal</h4>
-                <p>Audio transcription (10x Whisper for Chinese-English), video analysis, rapid summarization. Native audio generation for research reports.</p>
+                <p>Audio transcription (10x Whisper accuracy for Chinese-English code-switching). Native audio generation for podcasts and video narration. Video analysis and rapid summarization.</p>
             </div>
             <div class="layer">
                 <h4>Stateful Experience System</h4>
-                <p>Structured error log (错题本) prevents repeated mistakes. Technical state persists; research judgments start fresh to avoid confirmation bias.</p>
+                <p>Structured error log (错题本) prevents repeated mistakes. Technical state persists across sessions; research judgments start fresh to avoid confirmation bias.</p>
             </div>
         </div>
 
+        <!-- Design Philosophy -->
         <h2 class="section-title" style="margin-bottom:32px">Design Philosophy</h2>
         <div class="arch-block">
             <h3>Stability Over Speed</h3>
