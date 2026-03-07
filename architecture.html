@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture — Agentic Sciences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand"><span class="brand-icon">◈</span> Agentic Sciences</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="research.html">Research</a>
+            <a href="architecture.html" class="active">Architecture</a>
+            <a href="outputs.html">Outputs</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="container">
+        <h1>System Architecture</h1>
+        <p>A multi-model AI agent system for autonomous quantitative research</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+
+        <div class="arch-diagram-box">📱 Voice / Text Command (Telegram)
+        │
+        ▼
+🤖 Claude Opus 4 — Primary Agent / Orchestrator
+        │
+        ├──── 🖥️  Research Server 1 (112 threads, 754GB RAM)
+        │         └── Kaiko: 64 exchanges, tick-level OB + trades (10yr)
+        │
+        ├──── 🖥️  Research Server 2 (via SSH)
+        │         └── TAQ · WRDS (272 DBs) · NASDAQ · Numerator
+        │
+        ├──── ☁️  Cloud Server — Data collection + automation
+        │
+        ├──── 🧠  Gemini 3.1 Pro — Paper writing, deep reasoning
+        ├──── ⚡  Gemini Flash — Audio/video transcription (10x Whisper)
+        │
+        ├──── 📊  30+ Financial Data APIs
+        │         ├── Crypto:    Binance · Hyperliquid · Polymarket · DefiLlama
+        │         ├── Equities:  Yahoo Finance · Twelve Data · Alpha Vantage
+        │         ├── Macro:     FRED · World Bank · ECB
+        │         └── Options:   Deribit · CBOE
+        │
+        └──── 📝  Stateful Memory System (error logs, lessons learned)</div>
+
+        <h2 class="section-title" style="margin-bottom:32px">Data Layer</h2>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>Kaiko Consolidated Data</h4>
+                <p>10 years of tick-level order book snapshots (up to 5,000 bid/ask levels) and raw trades across 64 cryptocurrency exchanges. Spot, perpetual, quarterly futures, and options.</p>
+            </div>
+            <div class="layer">
+                <h4>TAQ (Trade and Quote)</h4>
+                <p>NYSE TAQ millisecond-resolution data for all US-listed equities. Intraday microstructure, price impact estimation, cross-market event studies.</p>
+            </div>
+            <div class="layer">
+                <h4>WRDS Academic Databases</h4>
+                <p>Direct PostgreSQL to 272 databases: CRSP, Compustat, IBES, Thomson Reuters, RavenPack, and more. Full spectrum of financial and economic data.</p>
+            </div>
+            <div class="layer">
+                <h4>Real-Time Market Data</h4>
+                <p>Live connections to Binance, Hyperliquid (REST + WebSocket + S3), Polymarket (Gamma + CLOB), and 25+ additional providers across all asset classes.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-bottom:32px">AI Model Layer</h2>
+        <div class="layer-grid">
+            <div class="layer">
+                <h4>Claude Opus 4 — Orchestrator</h4>
+                <p>Manages the full research lifecycle: data exploration → hypothesis → code → analysis → figures → paper → iteration. Stateful memory across sessions.</p>
+            </div>
+            <div class="layer">
+                <h4>Gemini 3.1 Pro — Deep Reasoning</h4>
+                <p>Long-form academic writing, complex analytical reasoning, cross-model review. Publication-quality prose with proper econometric methodology.</p>
+            </div>
+            <div class="layer">
+                <h4>Gemini Flash — Multimodal</h4>
+                <p>Audio transcription (10x Whisper for Chinese-English), video analysis, rapid summarization. Native audio generation for research reports.</p>
+            </div>
+            <div class="layer">
+                <h4>Stateful Experience System</h4>
+                <p>Structured error log (错题本) prevents repeated mistakes. Technical state persists; research judgments start fresh to avoid confirmation bias.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-bottom:32px">Design Philosophy</h2>
+        <div class="arch-block">
+            <h3>Stability Over Speed</h3>
+            <p>Run at 80% capacity, never 100%. Prevent OOM crashes and data corruption. Every analysis script is independently runnable with built-in error handling.</p>
+        </div>
+        <div class="arch-block">
+            <h3>Stateful for Technical, Stateless for Research</h3>
+            <p>Technical details (file paths, field names, bugs) accumulate in a structured log. Research judgments start fresh — past conclusions don't constrain new hypotheses. Prevents confirmation bias while avoiding repeated mistakes.</p>
+        </div>
+        <div class="arch-block">
+            <h3>Honest Replication</h3>
+            <p>All discrepancies between original papers and our replications are documented transparently. When results differ from the literature, the difference is reported, not hidden.</p>
+        </div>
+        <div class="arch-block">
+            <h3>Global Compute Leverage</h3>
+            <p>Each API call rents access to infrastructure worth billions — Google's TPU clusters, Anthropic's GPU farms, exchange matching engines. The research budget buys a ~20,000,000× cost-to-infrastructure leverage ratio.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand"><span class="brand-icon">◈</span> Agentic Sciences</div>
+            <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
+        </div>
+        <div class="footer-copy">© 2026 Agentic Sciences</div>
+    </div>
+</footer>
+
+</body>
+</html>
