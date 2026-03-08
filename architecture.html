@@ -6,12 +6,28 @@
     <title>Architecture — Agentic Sciences</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .diagram {
+            background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 32px; margin: 32px auto; max-width: 640px; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; line-height: 1.8; white-space: pre; overflow-x: auto; color: var(--text);
+        }
+        .sub { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
+        .group-title { font-size: 14px; font-weight: 600; margin: 36px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+        .item { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+        .item h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .item p { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+        .item p strong { color: var(--text); }
+        .wide { grid-column: 1 / -1; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .diagram { font-size: 10px; padding: 16px; } }
+    </style>
 </head>
 <body>
 
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-brand"><span class="brand-icon">◈</span> Agentic Sciences</a>
+        <a href="index.html" class="nav-brand">Agentic Sciences</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="architecture.html" class="active">Architecture</a>
@@ -22,268 +38,214 @@
 
 <div class="page-header">
     <div class="container">
-        <h1>System Architecture</h1>
-        <p>A multi-model AI agent system for autonomous quantitative research</p>
+        <h1>Architecture</h1>
+        <p>Multi-model AI agent system for autonomous quantitative research</p>
     </div>
 </div>
 
 <section class="section">
     <div class="container">
 
-        <!-- Key Stats -->
-        <div class="hero-stats" style="margin-bottom:48px">
-            <div class="stat">
-                <div class="stat-number">2.9PB</div>
-                <div class="stat-label">Total Storage</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">126TB</div>
-                <div class="stat-label">Financial Data</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">600+</div>
-                <div class="stat-label">CPU Cores</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">H100</div>
-                <div class="stat-label">GPU Access</div>
-            </div>
+        <!-- Stats -->
+        <div class="hero-stats" style="margin-bottom:24px">
+            <div class="stat"><div class="stat-number">2.9PB</div><div class="stat-label">Storage</div></div>
+            <div class="stat"><div class="stat-number">126TB</div><div class="stat-label">Financial Data</div></div>
+            <div class="stat"><div class="stat-number">860</div><div class="stat-label">CPU Cores</div></div>
+            <div class="stat"><div class="stat-number">H100</div><div class="stat-label">GPU Access</div></div>
         </div>
 
-        <div class="arch-diagram-box">                         Telegram (Voice / Text)
-                                │
-                                ▼
-                   Claude Opus 4 — Orchestrator
-                                │
-          ┌─────────┬───────────┼───────────┬──────────┐
-          ▼         ▼           ▼           ▼          ▼
-      research3  research1   BioHPC    30+ APIs    Memory
-      (always-on)(SSH)       (SLURM)               System
-          │         │           │
-          ▼         ▼           ▼
-   ┌──────────┐ ┌────────┐ ┌──────────────────────┐
-   │  Kaiko   │ │TAQ 14TB│ │  12 ECCO nodes       │
-   │  11TB    │ │DTAQ    │ │  8 GPU nodes (H100+) │
-   │  64 exch │ │NASDAQ  │ │  2.7PB Lustre FS     │
-   │  10yr OB │ │WRDS    │ │  500+ CPU cores      │
-   └──────────┘ └────────┘ └──────────────────────┘</div>
+        <!-- System Diagram -->
+<div class="diagram">            Telegram (Voice / Text)
+                    │
+                    ▼
+       Claude Opus 4 — Orchestrator
+                    │
+      ┌─────────┬───┼───┬──────────┐
+      ▼         ▼   ▼   ▼          ▼
+  research3  research1  BioHPC  30+ APIs
+  (primary)  (SSH)      (SLURM)
+      │         │         │
+  ┌───┴───┐ ┌───┴──┐ ┌───┴───────────┐
+  │ Kaiko │ │ TAQ  │ │ 12 ECCO nodes │
+  │ 11TB  │ │ 14TB │ │ 8 GPU nodes   │
+  │ 64 ex │ │ WRDS │ │ 2.7PB Lustre  │
+  └───────┘ └──────┘ └───────────────┘</div>
 
-        <!-- Compute Infrastructure -->
-        <h2 class="section-title" style="margin-bottom:32px">Compute Infrastructure</h2>
-        <p class="section-desc">Two independent clusters at Cornell: dedicated JCB research servers + BioHPC HPC cluster</p>
-
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">JCB Research Servers (Always-On)</h3>
-        <div class="layer-grid">
-            <div class="layer">
+        <!-- Compute -->
+        <div class="group-title">Compute — JCB Research Servers</div>
+        <p class="sub">Always-on dedicated servers at Cornell Johnson School of Business</p>
+        <div class="grid">
+            <div class="item">
                 <h4>Research Server 3 (Primary)</h4>
-                <p>2× Intel Xeon Gold 6258R (28c each) · 112 threads · 754GB RAM · 153TB storage<br>
-                Direct access to all on-premise financial datasets (Kaiko, TAQ, NASDAQ, WRDS).<br>
-                AI agent runs here 24/7. Autonomous research pipeline.</p>
+                <p>2× Xeon Gold 6258R · 112 threads · 754GB RAM · 153TB<br>Direct access to all financial datasets. AI agent runs 24/7.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>Research Server 1 (Secondary)</h4>
-                <p>Linked via SSH (Kerberos auth)<br>
-                TAQ/DTAQ high-frequency equity data · WRDS mirrors · NASDAQ feeds · Numerator consumer data</p>
+                <p>2× Xeon Gold 6152 · 88 threads · 628GB RAM<br>TAQ/DTAQ equity data · WRDS mirrors · NASDAQ · Numerator</p>
             </div>
         </div>
 
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Cornell BioHPC Cluster (On-Demand)</h3>
-        <div class="layer-grid">
-            <div class="layer">
-                <h4>ECCO Compute Nodes (12 nodes)</h4>
-                <p>SLURM-managed partitions with 500+ CPU cores:<br>
-                <strong>Fast partition</strong> — 6 nodes, up to 112 cores / 256GB RAM each<br>
-                <strong>Slow partition</strong> — 3 nodes, 28–56 cores / 128–251GB RAM<br>
-                <strong>Large-memory</strong> — 1 node, 32 cores / <strong>1TB RAM</strong><br>
-                <strong>Interactive</strong> — 2 nodes, 32 cores / 231–257GB RAM</p>
+        <div class="group-title">Compute — Cornell BioHPC</div>
+        <p class="sub">On-demand HPC cluster via SLURM scheduler</p>
+        <div class="grid">
+            <div class="item">
+                <h4>CPU Nodes (12 ECCO)</h4>
+                <p><strong>Fast</strong> — 6 nodes, 112c / 256GB each<br><strong>Slow</strong> — 3 nodes, 28–56c<br><strong>Large-memory</strong> — 1 node, 32c / 1TB RAM<br><strong>Interactive</strong> — 2 nodes, 32c</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>GPU Nodes (Reservable)</h4>
-                <p>8 GPU-equipped servers via BioHPC reservation system:<br>
-                <strong>2× NVIDIA H100</strong> — Top-tier for LLM inference &amp; fine-tuning<br>
-                <strong>2× NVIDIA A100</strong> — Large-scale model training<br>
-                <strong>2× NVIDIA A40</strong> · <strong>2× A6000</strong> — Research workloads<br>
-                <strong>P100 / T4</strong> — Lightweight GPU tasks<br>
-                Docker &amp; Singularity containers supported</p>
+                <p><strong>2× H100</strong> — LLM inference & fine-tuning<br><strong>2× A100</strong> — Model training<br><strong>2× A40 · 2× A6000</strong> — Research<br>Docker & Singularity supported</p>
             </div>
-            <div class="layer">
-                <h4>Lustre Parallel Filesystem</h4>
-                <p><strong>lustre1</strong> — 755TB (541TB used)<br>
-                <strong>lustre2</strong> — 2.0PB (1.3PB used)<br>
-                High-throughput parallel I/O for large-scale data processing. Shared across all compute nodes.</p>
+            <div class="item">
+                <h4>Lustre Filesystem</h4>
+                <p><strong>lustre1</strong> — 755TB (541TB used)<br><strong>lustre2</strong> — 2.0PB (1.3PB used)<br>High-throughput parallel I/O across all nodes</p>
             </div>
-            <div class="layer">
-                <h4>Software Stack</h4>
-                <p>Python 3.12 · Pandas · NumPy · SciPy · SLURM job scheduler<br>
-                Docker &amp; Singularity for containerized ML workflows<br>
-                PyTorch / TensorFlow available via containers<br>
-                239 reservable machines across all categories</p>
+            <div class="item">
+                <h4>Software</h4>
+                <p>Python 3.12 · GROMACS · AlphaFold 2.3.2 · ColabFold<br>PyTorch / TensorFlow via containers<br>MATLAB · SAS · Stata · R</p>
             </div>
         </div>
 
-        <!-- Data Layer -->
-        <h2 class="section-title" style="margin-bottom:32px">Data Layer — On-Premise (126TB)</h2>
-        <p class="section-desc">All data stored locally for zero-latency access. No cloud data egress costs.</p>
-
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Cryptocurrency Data</h3>
-        <div class="layer-grid">
-            <div class="layer">
-                <h4>Kaiko Consolidated (11TB)</h4>
-                <p>Tick-level order book snapshots (up to 5,000 bid/ask levels) and raw trades across <strong>64 cryptocurrency exchanges</strong>. 10 years of history. Covers spot, perpetual futures, quarterly futures, and options markets.</p>
-            </div>
-            <div class="layer">
-                <h4>Kaiko EQ Versions (v3/v4)</h4>
-                <p>Enhanced quality datasets with standardized symbology, cross-exchange normalization, and derived metrics. Multiple versions for backward compatibility.</p>
+        <!-- Data -->
+        <div class="group-title">Data — Cryptocurrency (11TB)</div>
+        <div class="grid">
+            <div class="item wide">
+                <h4>Kaiko Consolidated</h4>
+                <p>Tick-level order book snapshots (up to 5,000 levels) and trades across <strong>64 exchanges</strong>. 10 years of spot, perpetual futures, quarterly futures, and options data. Enhanced quality versions (v3/v4) with standardized symbology.</p>
             </div>
         </div>
 
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">US Equity High-Frequency Data</h3>
-        <div class="layer-grid">
-            <div class="layer">
+        <div class="group-title">Data — US Equity High-Frequency (26TB)</div>
+        <div class="grid">
+            <div class="item">
                 <h4>NYSE TAQ (14TB)</h4>
-                <p>Millisecond-resolution trades and quotes for <strong>all US-listed equities</strong>. Daily TAQ and intraday TAQ (DTAQ). The gold standard for equity microstructure research. NBBO, trades, quotes with exchange identifiers.</p>
+                <p>Millisecond trades and quotes for all US-listed equities. NBBO, trade conditions, exchange IDs. The gold standard for microstructure.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>NASDAQ ITCH (12TB)</h4>
-                <p>NASDAQ TotalView-ITCH feed data. Multiple versions (v2–v5) spanning full history. Order-level data: add, execute, cancel, replace messages. Enables order-flow and queue-position analysis.</p>
+                <p>TotalView-ITCH feed (v2–v5). Order-level: add, execute, cancel, replace. Enables queue-position analysis.</p>
             </div>
         </div>
 
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">WRDS Academic Databases</h3>
-        <div class="layer-grid">
-            <div class="layer">
-                <h4>WRDS Cloud (272 databases)</h4>
-                <p>Direct PostgreSQL connection to the full WRDS suite. Real-time queries against the latest data without local storage constraints.</p>
+        <div class="group-title">Data — WRDS Academic Databases</div>
+        <div class="grid">
+            <div class="item">
+                <h4>Cloud (272 databases)</h4>
+                <p>Direct PostgreSQL to full WRDS suite. Real-time queries, latest data.</p>
             </div>
-            <div class="layer">
-                <h4>WRDS On-Premise Mirror (12TB)</h4>
-                <p>Local mirrors of high-frequency WRDS data. Order book snapshots at large/medium/small tick sizes (ob_l, ob_m, ob_s). Eliminates query latency for intensive computations.</p>
+            <div class="item">
+                <h4>On-Premise Mirror (12TB)</h4>
+                <p>Local order book snapshots (large/medium/small tick). Zero query latency.</p>
             </div>
         </div>
 
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Specialized Databases (6TB on-premise)</h3>
-        <div class="layer-grid">
-            <div class="layer">
+        <div class="group-title">Data — Specialized Databases (6TB)</div>
+        <div class="grid">
+            <div class="item">
                 <h4>CRSP & Compustat</h4>
-                <p>Complete US stock returns (CRSP) and financial statements (Compustat). Linked CRSP-Compustat merged dataset. The backbone of empirical finance.</p>
+                <p>US stock returns + financial statements. CRSP-Compustat merged.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>IBES & Thomson Reuters</h4>
-                <p>Analyst earnings estimates, recommendations, and target prices. Institutional holdings (S12/S34). Essential for event studies and analyst behavior research.</p>
+                <p>Analyst estimates, recommendations, institutional holdings (S12/S34).</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>OptionMetrics</h4>
-                <p>US equity options: implied volatility surfaces, Greeks, open interest, volume. Enables volatility research and options microstructure analysis.</p>
+                <p>Equity options: IV surfaces, Greeks, open interest, volume.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>TRACE (Fixed Income)</h4>
-                <p>Corporate bond transaction data from FINRA. Trade prices, volumes, and dealer identifiers. The definitive source for bond market microstructure.</p>
+                <p>Corporate bond transactions from FINRA. Prices, volumes, dealer IDs.</p>
             </div>
-            <div class="layer">
-                <h4>RavenPack (News Analytics)</h4>
-                <p>Real-time news sentiment scores, event detection, and entity mapping. Covers 300,000+ entities across global news sources. Links news events to market movements.</p>
+            <div class="item">
+                <h4>RavenPack (News)</h4>
+                <p>Sentiment scores, event detection, 300K+ entities. Links news → prices.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>Capital IQ & Factset</h4>
-                <p>Company fundamentals, M&A transactions, private company data (CapitalIQ). Multi-asset class analytics, ownership data, supply chain mappings (Factset).</p>
+                <p>Fundamentals, M&A, ownership, supply chain mappings.</p>
             </div>
-            <div class="layer">
-                <h4>MSCI ESG & GMI Ratings</h4>
-                <p>Environmental, social, and governance scores. Board composition, executive compensation, shareholder activism data. ESG integration research.</p>
+            <div class="item">
+                <h4>Transcripts (150GB)</h4>
+                <p>1M+ earnings call transcripts (2001–2023). Full XML with Q&A sections.</p>
             </div>
-            <div class="layer">
-                <h4>Additional Datasets</h4>
-                <p><strong>GovPX</strong> — US Treasury market quotes<br>
-                <strong>ATTOM</strong> — Real estate property data<br>
-                <strong>Numerator</strong> — Consumer purchase behavior<br>
-                <strong>Mergent</strong> — Fixed income securities<br>
-                <strong>ISSM</strong> — Intraday stock/bond data<br>
-                <strong>DealScan</strong> — Syndicated loan market<br>
-                <strong>Fama-French</strong> — Factor returns library<br>
-                <strong>MSRB</strong> — Municipal bond trades<br>
-                <strong>Incentive Lab</strong> — Executive compensation<br>
-                <strong>Insider Trading</strong> — SEC Form 4 filings<br>
-                <strong>Audit Analytics</strong> — Auditor data<br>
-                <strong>ETF Global</strong> — ETF holdings & flows<br>
-                <strong>CUSIP</strong> — Security identifier master</p>
+            <div class="item">
+                <h4>More</h4>
+                <p>GovPX · MSCI ESG · Morningstar · IHS Markit CDS · PitchBook · ISS · Fama-French · DealScan · CUSIP</p>
             </div>
         </div>
 
-        <h3 style="color:#60a5fa;font-size:18px;margin:32px 0 16px;text-align:center">Real-Time APIs (30+)</h3>
-        <div class="layer-grid">
-            <div class="layer">
-                <h4>Crypto Exchange Data</h4>
-                <p>Binance (data.binance.vision) · Hyperliquid (REST + WebSocket + S3 archive) · Polymarket (Gamma + CLOB) · Deribit options · CoinGecko</p>
+        <div class="group-title">Data — Real-Time APIs (30+)</div>
+        <div class="grid">
+            <div class="item">
+                <h4>Crypto Exchanges</h4>
+                <p>Binance · Hyperliquid · Polymarket · Deribit · CoinGecko</p>
             </div>
-            <div class="layer">
-                <h4>On-Chain / Blockchain Explorers</h4>
-                <p><strong>Blockscout</strong> — Ethereum, Base, Polygon, Optimism on-chain data (blocks, txs, tokens, contracts)<br>
-                <strong>Etherscan / BSCScan / Arbiscan / BaseScan</strong> — Multi-chain transaction &amp; contract analytics<br>
-                <strong>Blockchain.com</strong> — Bitcoin blocks, mempool, hash rate</p>
+            <div class="item">
+                <h4>On-Chain</h4>
+                <p>Blockscout · Etherscan · BSCScan · Arbiscan · Blockchain.com</p>
             </div>
-            <div class="layer">
-                <h4>DeFi Analytics</h4>
-                <p><strong>DefiLlama</strong> — 435 chains, 7,173 protocols, TVL tracking<br>
-                <strong>The Graph</strong> — Uniswap, Aave, Compound subgraph queries (GraphQL)<br>
-                <strong>Dune Analytics</strong> — SQL queries on decoded blockchain data</p>
+            <div class="item">
+                <h4>DeFi</h4>
+                <p>DefiLlama (435 chains) · The Graph (GraphQL) · Dune Analytics</p>
             </div>
-            <div class="layer">
-                <h4>Traditional Markets</h4>
-                <p>Yahoo Finance · Twelve Data · Alpha Vantage · FRED (macro) · World Bank · ECB · CBOE</p>
+            <div class="item">
+                <h4>Traditional</h4>
+                <p>Yahoo Finance · FRED · World Bank · ECB · CBOE · Alpha Vantage</p>
             </div>
         </div>
 
-        <!-- AI Model Layer -->
-        <h2 class="section-title" style="margin-bottom:32px">AI Model Layer</h2>
-        <div class="layer-grid">
-            <div class="layer">
+        <!-- AI Models -->
+        <div class="group-title">AI Model Layer</div>
+        <div class="grid">
+            <div class="item">
                 <h4>Claude Opus 4 — Orchestrator</h4>
-                <p>Primary agent managing the full research lifecycle: data exploration → hypothesis → code → analysis → figures → paper → iteration. Stateful memory across sessions. Voice-controlled via Telegram.</p>
+                <p>Primary agent: data → hypothesis → code → analysis → figures → paper. Stateful memory. Voice-controlled via Telegram.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>Gemini 3.1 Pro — Deep Reasoning</h4>
-                <p>Long-form academic writing, complex analytical reasoning, cross-model review. Publication-quality prose with proper econometric methodology discussions.</p>
+                <p>Long-form academic writing, complex analysis, cross-model review.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>Gemini Flash — Multimodal</h4>
-                <p>Audio transcription (10x Whisper accuracy for Chinese-English code-switching). Native audio generation for podcasts and video narration. Video analysis and rapid summarization.</p>
+                <p>Audio transcription (Chinese-English), native audio generation, video.</p>
             </div>
-            <div class="layer">
+            <div class="item">
                 <h4>Stateful Experience System</h4>
-                <p>Structured error log (错题本) prevents repeated mistakes. Technical state persists across sessions; research judgments start fresh to avoid confirmation bias.</p>
+                <p>Error log prevents repeated mistakes. Technical state persists; research judgments start fresh.</p>
             </div>
         </div>
 
-        <!-- Design Philosophy -->
-        <h2 class="section-title" style="margin-bottom:32px">Design Philosophy</h2>
-        <div class="arch-block">
-            <h3>Stability Over Speed</h3>
-            <p>Run at 80% capacity, never 100%. Prevent OOM crashes and data corruption. Every analysis script is independently runnable with built-in error handling.</p>
-        </div>
-        <div class="arch-block">
-            <h3>Stateful for Technical, Stateless for Research</h3>
-            <p>Technical details (file paths, field names, bugs) accumulate in a structured log. Research judgments start fresh — past conclusions don't constrain new hypotheses. Prevents confirmation bias while avoiding repeated mistakes.</p>
-        </div>
-        <div class="arch-block">
-            <h3>Honest Replication</h3>
-            <p>All discrepancies between original papers and our replications are documented transparently. When results differ from the literature, the difference is reported, not hidden.</p>
-        </div>
-        <div class="arch-block">
-            <h3>Global Compute Leverage</h3>
-            <p>Each API call rents access to infrastructure worth billions — Google's TPU clusters, Anthropic's GPU farms, exchange matching engines. The research budget buys a ~20,000,000× cost-to-infrastructure leverage ratio.</p>
+        <!-- Philosophy -->
+        <div class="group-title">Design Philosophy</div>
+        <div class="grid">
+            <div class="item">
+                <h4>Stability Over Speed</h4>
+                <p>Run at 80% capacity. Prevent OOM crashes. Every script independently runnable.</p>
+            </div>
+            <div class="item">
+                <h4>Stateful Tech, Stateless Research</h4>
+                <p>Technical details persist. Research judgments start fresh — no confirmation bias.</p>
+            </div>
+            <div class="item">
+                <h4>Honest Replication</h4>
+                <p>All discrepancies with literature are documented transparently, not hidden.</p>
+            </div>
+            <div class="item">
+                <h4>Global Compute Leverage</h4>
+                <p>Each API call rents billions in infrastructure. ~20M× cost-to-infra ratio.</p>
+            </div>
         </div>
 
     </div>
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <div class="footer-inner">
-            <div class="footer-brand"><span class="brand-icon">◈</span> Agentic Sciences</div>
-            <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
-        </div>
-        <div class="footer-copy">© 2026 Agentic Sciences</div>
+    <div class="footer-inner">
+        <div class="footer-brand">Agentic Sciences</div>
+        <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
     </div>
+    <div class="footer-copy">© 2026 Agentic Sciences</div>
 </footer>
 
 </body>
