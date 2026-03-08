@@ -7,20 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .diagram {
-            background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 32px; margin: 32px auto; max-width: 640px; font-family: 'JetBrains Mono', monospace;
-            font-size: 12px; line-height: 1.8; white-space: pre; overflow-x: auto; color: var(--text);
-        }
+        .diagram-svg { width: 100%; max-width: 700px; margin: 32px auto; display: block; }
         .sub { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
         .group-title { font-size: 14px; font-weight: 600; margin: 36px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 8px; }
         .item { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
         .item h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
         .item p { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
         .item p strong { color: var(--text); }
         .wide { grid-column: 1 / -1; }
-        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } .diagram { font-size: 10px; padding: 16px; } }
+        @media (max-width: 640px) { .grid, .grid-3 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -47,151 +44,212 @@
     <div class="container">
 
         <!-- Stats -->
-        <div class="hero-stats" style="margin-bottom:24px">
+        <div class="hero-stats" style="margin-bottom:16px">
             <div class="stat"><div class="stat-number">2.9PB</div><div class="stat-label">Storage</div></div>
             <div class="stat"><div class="stat-number">126TB</div><div class="stat-label">Financial Data</div></div>
-            <div class="stat"><div class="stat-number">860</div><div class="stat-label">CPU Cores</div></div>
+            <div class="stat"><div class="stat-number">860+</div><div class="stat-label">CPU Cores</div></div>
             <div class="stat"><div class="stat-number">H100</div><div class="stat-label">GPU Access</div></div>
+            <div class="stat"><div class="stat-number">272</div><div class="stat-label">WRDS Databases</div></div>
         </div>
 
-        <!-- System Diagram -->
-<div class="diagram">            Telegram (Voice / Text)
-                    │
-                    ▼
-       Claude Opus 4 — Orchestrator
-                    │
-      ┌─────────┬───┼───┬──────────┐
-      ▼         ▼   ▼   ▼          ▼
-  research3  research1  BioHPC  30+ APIs
-  (primary)  (SSH)      (SLURM)
-      │         │         │
-  ┌───┴───┐ ┌───┴──┐ ┌───┴───────────┐
-  │ Kaiko │ │ TAQ  │ │ 12 ECCO nodes │
-  │ 11TB  │ │ 14TB │ │ 8 GPU nodes   │
-  │ 64 ex │ │ WRDS │ │ 2.7PB Lustre  │
-  └───────┘ └──────┘ └───────────────┘</div>
+        <!-- SVG System Diagram -->
+        <svg class="diagram-svg" viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                .box { fill: #fff; stroke: #d1d5db; stroke-width: 1.2; rx: 6; }
+                .box-accent { fill: #f9fafb; stroke: #9ca3af; stroke-width: 1.5; rx: 6; }
+                .label { font-family: 'Inter', sans-serif; fill: #111; font-size: 11px; font-weight: 600; }
+                .sublabel { font-family: 'Inter', sans-serif; fill: #666; font-size: 9px; }
+                .line { stroke: #9ca3af; stroke-width: 1.2; }
+                .line-dash { stroke: #d1d5db; stroke-width: 1; stroke-dasharray: 4 3; }
+                .arrow { fill: #9ca3af; }
+                .group-label { font-family: 'Inter', sans-serif; fill: #999; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
+            </style>
 
-        <!-- Compute -->
-        <div class="group-title">Compute — JCB Research Servers</div>
-        <p class="sub">Always-on dedicated servers at Cornell Johnson School of Business</p>
+            <!-- User Input -->
+            <rect x="260" y="8" width="180" height="36" class="box-accent"/>
+            <text x="350" y="22" text-anchor="middle" class="label">👤 Qihong</text>
+            <text x="350" y="34" text-anchor="middle" class="sublabel">Telegram (Voice / Text)</text>
+
+            <!-- Arrow down -->
+            <line x1="350" y1="44" x2="350" y2="62" class="line"/>
+            <polygon points="346,58 354,58 350,66" class="arrow"/>
+
+            <!-- OpenClaw -->
+            <rect x="275" y="66" width="150" height="32" class="box"/>
+            <text x="350" y="86" text-anchor="middle" class="label">OpenClaw Gateway</text>
+
+            <!-- Arrow down -->
+            <line x1="350" y1="98" x2="350" y2="116" class="line"/>
+            <polygon points="346,112 354,112 350,120" class="arrow"/>
+
+            <!-- Claude Orchestrator -->
+            <rect x="235" y="120" width="230" height="40" class="box-accent" style="stroke:#111;stroke-width:2"/>
+            <text x="350" y="138" text-anchor="middle" class="label" style="font-size:12px">Claude Opus 4 — Orchestrator</text>
+            <text x="350" y="152" text-anchor="middle" class="sublabel">Research lifecycle · Memory · Code · Analysis</text>
+
+            <!-- Branches from orchestrator -->
+            <!-- Left: Research3 -->
+            <line x1="280" y1="160" x2="110" y2="195" class="line"/>
+            <polygon points="108,191 114,191 111,198" class="arrow"/>
+            <!-- Center-left: Research1 -->
+            <line x1="320" y1="160" x2="280" y2="195" class="line"/>
+            <polygon points="278,191 284,191 281,198" class="arrow"/>
+            <!-- Center: BioHPC -->
+            <line x1="350" y1="160" x2="350" y2="195" class="line"/>
+            <polygon points="346,191 354,191 350,198" class="arrow"/>
+            <!-- Center-right: Tencent -->
+            <line x1="380" y1="160" x2="420" y2="195" class="line"/>
+            <polygon points="418,191 424,191 421,198" class="arrow"/>
+            <!-- Right: AI Models -->
+            <line x1="420" y1="160" x2="580" y2="195" class="line"/>
+            <polygon points="578,191 584,191 581,198" class="arrow"/>
+
+            <!-- Research3 -->
+            <rect x="20" y="198" width="180" height="60" class="box-accent"/>
+            <text x="110" y="215" text-anchor="middle" class="label">Research Server 3</text>
+            <text x="110" y="228" text-anchor="middle" class="sublabel">Primary · 112 threads · 754GB</text>
+            <text x="110" y="240" text-anchor="middle" class="sublabel">Kaiko 11TB · 153TB storage</text>
+            <text x="110" y="252" text-anchor="middle" class="sublabel">Agent runs here 24/7</text>
+
+            <!-- Research1 -->
+            <rect x="210" y="198" width="140" height="60" class="box"/>
+            <text x="280" y="215" text-anchor="middle" class="label">Research Server 1</text>
+            <text x="280" y="228" text-anchor="middle" class="sublabel">SSH · 88 threads · 628GB</text>
+            <text x="280" y="240" text-anchor="middle" class="sublabel">TAQ 14TB · NASDAQ 12TB</text>
+            <text x="280" y="252" text-anchor="middle" class="sublabel">WRDS · Transcripts 150GB</text>
+
+            <!-- BioHPC -->
+            <rect x="360" y="198" width="120" height="60" class="box"/>
+            <text x="420" y="215" text-anchor="middle" class="label">Cornell BioHPC</text>
+            <text x="420" y="228" text-anchor="middle" class="sublabel">SLURM · 660 cores</text>
+            <text x="420" y="240" text-anchor="middle" class="sublabel">H100/A100 GPUs</text>
+            <text x="420" y="252" text-anchor="middle" class="sublabel">2.7PB Lustre</text>
+
+            <!-- Tencent Cloud (dashed) -->
+            <rect x="490" y="198" width="120" height="60" class="box" style="stroke-dasharray:4 3"/>
+            <text x="550" y="215" text-anchor="middle" class="label">Tencent Cloud</text>
+            <text x="550" y="228" text-anchor="middle" class="sublabel">Backup · Sync every 6h</text>
+            <text x="550" y="240" text-anchor="middle" class="sublabel">BioHPC tunnel</text>
+            <text x="550" y="252" text-anchor="middle" class="sublabel">Redundancy node</text>
+
+            <!-- AI Models (right side, vertical) -->
+            <rect x="620" y="198" width="70" height="60" class="box"/>
+            <text x="655" y="215" text-anchor="middle" class="label" style="font-size:10px">AI Models</text>
+            <text x="655" y="228" text-anchor="middle" class="sublabel">Gemini 3.1</text>
+            <text x="655" y="240" text-anchor="middle" class="sublabel">Gemini Flash</text>
+            <text x="655" y="252" text-anchor="middle" class="sublabel">Claude Opus</text>
+
+            <!-- SSH arrow between R3 and R1 -->
+            <line x1="200" y1="228" x2="210" y2="228" class="line-dash"/>
+            <text x="205" y="224" text-anchor="middle" class="group-label" style="font-size:7px">SSH</text>
+
+            <!-- DATA LAYER HEADER -->
+            <text x="350" y="285" text-anchor="middle" class="group-label">DATA LAYER — ON-PREMISE (126TB)</text>
+            <line x1="40" y1="290" x2="660" y2="290" class="line-dash"/>
+
+            <!-- Data boxes row 1 -->
+            <rect x="20" y="300" width="130" height="48" class="box"/>
+            <text x="85" y="317" text-anchor="middle" class="label" style="font-size:10px">Kaiko Crypto</text>
+            <text x="85" y="330" text-anchor="middle" class="sublabel">11TB · 64 exchanges</text>
+            <text x="85" y="342" text-anchor="middle" class="sublabel">Spot · Futures · Options</text>
+
+            <rect x="160" y="300" width="130" height="48" class="box"/>
+            <text x="225" y="317" text-anchor="middle" class="label" style="font-size:10px">NYSE TAQ</text>
+            <text x="225" y="330" text-anchor="middle" class="sublabel">14TB · All US equities</text>
+            <text x="225" y="342" text-anchor="middle" class="sublabel">Millisecond resolution</text>
+
+            <rect x="300" y="300" width="130" height="48" class="box"/>
+            <text x="365" y="317" text-anchor="middle" class="label" style="font-size:10px">NASDAQ ITCH</text>
+            <text x="365" y="330" text-anchor="middle" class="sublabel">12TB · Order-level</text>
+            <text x="365" y="342" text-anchor="middle" class="sublabel">v2–v5 full history</text>
+
+            <rect x="440" y="300" width="120" height="48" class="box"/>
+            <text x="500" y="317" text-anchor="middle" class="label" style="font-size:10px">WRDS Cloud</text>
+            <text x="500" y="330" text-anchor="middle" class="sublabel">272 databases</text>
+            <text x="500" y="342" text-anchor="middle" class="sublabel">PostgreSQL direct</text>
+
+            <rect x="570" y="300" width="120" height="48" class="box"/>
+            <text x="630" y="317" text-anchor="middle" class="label" style="font-size:10px">WRDS Local</text>
+            <text x="630" y="330" text-anchor="middle" class="sublabel">12TB mirror</text>
+            <text x="630" y="342" text-anchor="middle" class="sublabel">Order book data</text>
+
+            <!-- Data boxes row 2 -->
+            <rect x="20" y="358" width="100" height="48" class="box"/>
+            <text x="70" y="375" text-anchor="middle" class="label" style="font-size:9px">CRSP</text>
+            <text x="70" y="387" text-anchor="middle" class="sublabel">Stock returns</text>
+            <text x="70" y="399" text-anchor="middle" class="sublabel">1.1TB</text>
+
+            <rect x="128" y="358" width="100" height="48" class="box"/>
+            <text x="178" y="375" text-anchor="middle" class="label" style="font-size:9px">Compustat</text>
+            <text x="178" y="387" text-anchor="middle" class="sublabel">Fundamentals</text>
+            <text x="178" y="399" text-anchor="middle" class="sublabel">882GB</text>
+
+            <rect x="236" y="358" width="100" height="48" class="box"/>
+            <text x="286" y="375" text-anchor="middle" class="label" style="font-size:9px">OptionMetrics</text>
+            <text x="286" y="387" text-anchor="middle" class="sublabel">IV surfaces</text>
+            <text x="286" y="399" text-anchor="middle" class="sublabel">3TB</text>
+
+            <rect x="344" y="358" width="100" height="48" class="box"/>
+            <text x="394" y="375" text-anchor="middle" class="label" style="font-size:9px">RavenPack</text>
+            <text x="394" y="387" text-anchor="middle" class="sublabel">News sentiment</text>
+            <text x="394" y="399" text-anchor="middle" class="sublabel">1.9TB</text>
+
+            <rect x="452" y="358" width="100" height="48" class="box"/>
+            <text x="502" y="375" text-anchor="middle" class="label" style="font-size:9px">IBES</text>
+            <text x="502" y="387" text-anchor="middle" class="sublabel">Analyst estimates</text>
+            <text x="502" y="399" text-anchor="middle" class="sublabel">1.2TB</text>
+
+            <rect x="560" y="358" width="130" height="48" class="box"/>
+            <text x="625" y="375" text-anchor="middle" class="label" style="font-size:9px">Transcripts</text>
+            <text x="625" y="387" text-anchor="middle" class="sublabel">1M+ earnings calls</text>
+            <text x="625" y="399" text-anchor="middle" class="sublabel">150GB · 2001–2023</text>
+
+            <!-- Row 3: smaller dbs -->
+            <rect x="20" y="416" width="670" height="32" class="box" style="fill:#f9fafb"/>
+            <text x="350" y="428" text-anchor="middle" class="sublabel" style="font-size:9px">
+                TRACE · Capital IQ · Factset · MSCI ESG · PitchBook · IHS Markit CDS · Morningstar · ISS · DealScan · Fama-French · GovPX · Numerator · CUSIP
+            </text>
+            <text x="350" y="440" text-anchor="middle" class="sublabel" style="font-size:8px">+ Sustainalytics · Short Interest · Insider Trading · Audit Analytics · ETF Global · ISSM · Mergent · ATTOM · Incentive Lab</text>
+
+            <!-- API LAYER -->
+            <text x="350" y="470" text-anchor="middle" class="group-label">REAL-TIME APIs (30+)</text>
+            <line x1="40" y1="475" x2="660" y2="475" class="line-dash"/>
+
+            <rect x="20" y="483" width="160" height="32" class="box"/>
+            <text x="100" y="500" text-anchor="middle" class="sublabel">Binance · Hyperliquid · Deribit</text>
+            <text x="100" y="511" text-anchor="middle" class="sublabel">Polymarket · CoinGecko</text>
+
+            <rect x="190" y="483" width="160" height="32" class="box"/>
+            <text x="270" y="500" text-anchor="middle" class="sublabel">Etherscan · Blockscout</text>
+            <text x="270" y="511" text-anchor="middle" class="sublabel">DefiLlama · The Graph · Dune</text>
+
+            <rect x="360" y="483" width="160" height="32" class="box"/>
+            <text x="440" y="500" text-anchor="middle" class="sublabel">Yahoo Finance · FRED</text>
+            <text x="440" y="511" text-anchor="middle" class="sublabel">World Bank · ECB · CBOE</text>
+
+            <rect x="530" y="483" width="160" height="32" class="box"/>
+            <text x="610" y="500" text-anchor="middle" class="sublabel">arXiv · PubMed · OpenAlex</text>
+            <text x="610" y="511" text-anchor="middle" class="sublabel">CrossRef · bioRxiv · NBER</text>
+        </svg>
+
+        <!-- Compute Details -->
+        <div class="group-title">Compute Resources</div>
         <div class="grid">
             <div class="item">
                 <h4>Research Server 3 (Primary)</h4>
-                <p>2× Xeon Gold 6258R · 112 threads · 754GB RAM · 153TB<br>Direct access to all financial datasets. AI agent runs 24/7.</p>
+                <p>2× Xeon Gold 6258R · 112 threads · 754GB RAM · 153TB<br>All Kaiko crypto data · Agent runs 24/7 · Python 3.12</p>
             </div>
             <div class="item">
                 <h4>Research Server 1 (Secondary)</h4>
-                <p>2× Xeon Gold 6152 · 88 threads · 628GB RAM<br>TAQ/DTAQ equity data · WRDS mirrors · NASDAQ · Numerator</p>
-            </div>
-        </div>
-
-        <div class="group-title">Compute — Cornell BioHPC</div>
-        <p class="sub">On-demand HPC cluster via SLURM scheduler</p>
-        <div class="grid">
-            <div class="item">
-                <h4>CPU Nodes (12 ECCO)</h4>
-                <p><strong>Fast</strong> — 6 nodes, 112c / 256GB each<br><strong>Slow</strong> — 3 nodes, 28–56c<br><strong>Large-memory</strong> — 1 node, 32c / 1TB RAM<br><strong>Interactive</strong> — 2 nodes, 32c</p>
+                <p>2× Xeon Gold 6152 · 88 threads · 628GB RAM<br>TAQ/DTAQ · WRDS · NASDAQ · Transcripts · Kerberos SSH</p>
             </div>
             <div class="item">
-                <h4>GPU Nodes (Reservable)</h4>
-                <p><strong>2× H100</strong> — LLM inference & fine-tuning<br><strong>2× A100</strong> — Model training<br><strong>2× A40 · 2× A6000</strong> — Research<br>Docker & Singularity supported</p>
+                <h4>Cornell BioHPC Cluster</h4>
+                <p>12 ECCO nodes · 660 cores · 3.5TB RAM total<br>H100/A100/A40 GPUs · SLURM · GROMACS · AlphaFold<br>2.7PB Lustre parallel filesystem</p>
             </div>
             <div class="item">
-                <h4>Lustre Filesystem</h4>
-                <p><strong>lustre1</strong> — 755TB (541TB used)<br><strong>lustre2</strong> — 2.0PB (1.3PB used)<br>High-throughput parallel I/O across all nodes</p>
-            </div>
-            <div class="item">
-                <h4>Software</h4>
-                <p>Python 3.12 · GROMACS · AlphaFold 2.3.2 · ColabFold<br>PyTorch / TensorFlow via containers<br>MATLAB · SAS · Stata · R</p>
-            </div>
-        </div>
-
-        <!-- Data -->
-        <div class="group-title">Data — Cryptocurrency (11TB)</div>
-        <div class="grid">
-            <div class="item wide">
-                <h4>Kaiko Consolidated</h4>
-                <p>Tick-level order book snapshots (up to 5,000 levels) and trades across <strong>64 exchanges</strong>. 10 years of spot, perpetual futures, quarterly futures, and options data. Enhanced quality versions (v3/v4) with standardized symbology.</p>
-            </div>
-        </div>
-
-        <div class="group-title">Data — US Equity High-Frequency (26TB)</div>
-        <div class="grid">
-            <div class="item">
-                <h4>NYSE TAQ (14TB)</h4>
-                <p>Millisecond trades and quotes for all US-listed equities. NBBO, trade conditions, exchange IDs. The gold standard for microstructure.</p>
-            </div>
-            <div class="item">
-                <h4>NASDAQ ITCH (12TB)</h4>
-                <p>TotalView-ITCH feed (v2–v5). Order-level: add, execute, cancel, replace. Enables queue-position analysis.</p>
-            </div>
-        </div>
-
-        <div class="group-title">Data — WRDS Academic Databases</div>
-        <div class="grid">
-            <div class="item">
-                <h4>Cloud (272 databases)</h4>
-                <p>Direct PostgreSQL to full WRDS suite. Real-time queries, latest data.</p>
-            </div>
-            <div class="item">
-                <h4>On-Premise Mirror (12TB)</h4>
-                <p>Local order book snapshots (large/medium/small tick). Zero query latency.</p>
-            </div>
-        </div>
-
-        <div class="group-title">Data — Specialized Databases (6TB)</div>
-        <div class="grid">
-            <div class="item">
-                <h4>CRSP & Compustat</h4>
-                <p>US stock returns + financial statements. CRSP-Compustat merged.</p>
-            </div>
-            <div class="item">
-                <h4>IBES & Thomson Reuters</h4>
-                <p>Analyst estimates, recommendations, institutional holdings (S12/S34).</p>
-            </div>
-            <div class="item">
-                <h4>OptionMetrics</h4>
-                <p>Equity options: IV surfaces, Greeks, open interest, volume.</p>
-            </div>
-            <div class="item">
-                <h4>TRACE (Fixed Income)</h4>
-                <p>Corporate bond transactions from FINRA. Prices, volumes, dealer IDs.</p>
-            </div>
-            <div class="item">
-                <h4>RavenPack (News)</h4>
-                <p>Sentiment scores, event detection, 300K+ entities. Links news → prices.</p>
-            </div>
-            <div class="item">
-                <h4>Capital IQ & Factset</h4>
-                <p>Fundamentals, M&A, ownership, supply chain mappings.</p>
-            </div>
-            <div class="item">
-                <h4>Transcripts (150GB)</h4>
-                <p>1M+ earnings call transcripts (2001–2023). Full XML with Q&A sections.</p>
-            </div>
-            <div class="item">
-                <h4>More</h4>
-                <p>GovPX · MSCI ESG · Morningstar · IHS Markit CDS · PitchBook · ISS · Fama-French · DealScan · CUSIP</p>
-            </div>
-        </div>
-
-        <div class="group-title">Data — Real-Time APIs (30+)</div>
-        <div class="grid">
-            <div class="item">
-                <h4>Crypto Exchanges</h4>
-                <p>Binance · Hyperliquid · Polymarket · Deribit · CoinGecko</p>
-            </div>
-            <div class="item">
-                <h4>On-Chain</h4>
-                <p>Blockscout · Etherscan · BSCScan · Arbiscan · Blockchain.com</p>
-            </div>
-            <div class="item">
-                <h4>DeFi</h4>
-                <p>DefiLlama (435 chains) · The Graph (GraphQL) · Dune Analytics</p>
-            </div>
-            <div class="item">
-                <h4>Traditional</h4>
-                <p>Yahoo Finance · FRED · World Bank · ECB · CBOE · Alpha Vantage</p>
+                <h4>Tencent Cloud (Backup)</h4>
+                <p>Redundancy node · Auto-sync every 6h<br>Reverse SSH tunnel to BioHPC<br>Can continue research if primary offline</p>
             </div>
         </div>
 
@@ -200,19 +258,19 @@
         <div class="grid">
             <div class="item">
                 <h4>Claude Opus 4 — Orchestrator</h4>
-                <p>Primary agent: data → hypothesis → code → analysis → figures → paper. Stateful memory. Voice-controlled via Telegram.</p>
+                <p>Primary agent: data → hypothesis → code → analysis → paper. Stateful memory. Voice-controlled via Telegram + OpenClaw.</p>
             </div>
             <div class="item">
                 <h4>Gemini 3.1 Pro — Deep Reasoning</h4>
-                <p>Long-form academic writing, complex analysis, cross-model review.</p>
+                <p>Literature review, academic writing, complex analysis, cross-model fact-checking and review.</p>
             </div>
             <div class="item">
                 <h4>Gemini Flash — Multimodal</h4>
-                <p>Audio transcription (Chinese-English), native audio generation, video.</p>
+                <p>Audio transcription (Chinese-English), native audio/video generation, rapid summarization.</p>
             </div>
             <div class="item">
                 <h4>Stateful Experience System</h4>
-                <p>Error log prevents repeated mistakes. Technical state persists; research judgments start fresh.</p>
+                <p>Error log prevents repeated mistakes. Technical state persists; research judgments start fresh to avoid bias.</p>
             </div>
         </div>
 
@@ -229,7 +287,7 @@
             </div>
             <div class="item">
                 <h4>Honest Replication</h4>
-                <p>All discrepancies with literature are documented transparently, not hidden.</p>
+                <p>All discrepancies with literature documented transparently, not hidden.</p>
             </div>
             <div class="item">
                 <h4>Global Compute Leverage</h4>
