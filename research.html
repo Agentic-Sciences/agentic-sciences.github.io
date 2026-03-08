@@ -6,6 +6,26 @@
     <title>Research — Agentic Sciences</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .research-item { background: rgba(30,58,95,0.3); border: 1px solid #1e3a5f; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+        .research-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 12px; }
+        .status-active { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+        .status-progress { background: rgba(96,165,250,0.1); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+        .status-explore { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+        .research-item h3 { color: #f1f5f9; font-size: 20px; margin: 0 0 8px; }
+        .research-item .desc { color: #94a3b8; font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+        .research-item .meta { color: #64748b; font-size: 12px; margin-bottom: 16px; }
+        .materials { display: flex; gap: 10px; flex-wrap: wrap; }
+        .materials a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: rgba(30,58,95,0.5); border: 1px solid #1e3a5f; border-radius: 6px; color: #94a3b8; font-size: 12px; text-decoration: none; transition: all 0.2s; }
+        .materials a:hover { background: rgba(96,165,250,0.15); color: #60a5fa; border-color: #60a5fa; }
+        .figure-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
+        .figure-gallery img { width: 100%; border-radius: 6px; border: 1px solid #1e3a5f; cursor: pointer; transition: transform 0.2s; }
+        .figure-gallery img:hover { transform: scale(1.02); }
+        .fig-caption { font-size: 10px; color: #64748b; text-align: center; margin-top: 4px; }
+        .key-finding { background: rgba(96,165,250,0.08); border-left: 3px solid #60a5fa; padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+        .key-finding p { color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0; }
+        .key-finding strong { color: #f1f5f9; }
+    </style>
 </head>
 <body>
 
@@ -16,6 +36,7 @@
             <a href="/">Home</a>
             <a href="architecture.html">Architecture</a>
             <a href="research.html" class="active">Research</a>
+            <a href="t2d-research.html">T2D Biology</a>
         </div>
     </div>
 </nav>
@@ -23,54 +44,155 @@
 <div class="page-header">
     <div class="container">
         <h1>Research</h1>
-        <p>Autonomous AI-driven quantitative research</p>
+        <p>Autonomous AI-driven quantitative research across finance and biology</p>
     </div>
 </div>
 
 <section class="section">
     <div class="container">
-        <div class="research-list">
 
-            <!-- Project 1 -->
-            <div class="research-item">
-                <div class="research-status active">Active</div>
-                <h3>Perpetual Futures and Market Quality</h3>
-                <p class="desc">How do perpetual futures contracts affect spot market quality? Analysis of tick-level order book and trade data across Binance, Huobi, and OKEx — 5,213 trading days, 13 pairs. Finds hidden execution costs (effective spread ~1% vs quoted 0.03%) and 9x depth asymmetry across exchanges. Causal identification via Huobi's 2021 contract termination.</p>
-                <div class="meta">Cryptocurrency Microstructure · Kaiko · 2017–2023</div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-                    <a href="assets/papers/perpetual_futures_market_quality.pdf" class="btn btn-sm">📄 Paper</a>
-                    <a href="assets/papers/perpetual_futures_figures.pdf" class="btn btn-sm">📊 Figures</a>
-                    <a href="assets/slides/presentation_slides.pdf" class="btn btn-sm">📑 Slides</a>
-                    <a href="assets/videos/presentation_en.mp4" class="btn btn-sm">🎬 Video</a>
-                    <a href="assets/podcast/ep01_en.mp3" class="btn btn-sm">🎙️ Podcast</a>
-                </div>
+        <!-- Project 1: Perpetual Futures -->
+        <div class="research-item">
+            <span class="research-status status-active">Published</span>
+            <h3>Perpetual Futures and Market Quality</h3>
+            <p class="desc">How do perpetual futures contracts affect spot market quality? Analysis of tick-level order book and trade data across Binance, Huobi, and OKEx — 5,213 trading days, 13 pairs. Finds hidden execution costs (effective spread ~1% vs quoted 0.03%) and 9× depth asymmetry across exchanges. Causal identification via Huobi's 2021 contract termination as a natural experiment.</p>
+            <div class="key-finding">
+                <p><strong>Key Finding:</strong> Effective spreads are 30× larger than quoted spreads, with the "true" cost of trading dominated by price impact rather than displayed bid-ask spreads. Perpetual futures listing improves spot market liquidity by 15-23%.</p>
             </div>
-
-            <!-- Project 2 -->
-            <div class="research-item">
-                <div class="research-status active">Active</div>
-                <h3>Prediction Market Microstructure</h3>
-                <p class="desc">Microstructure analysis of Polymarket's CLOB-based prediction market. Order flow patterns, liquidity provision, and price formation around the 2024 US Presidential Election. Comparative analysis with Hyperliquid DEX.</p>
-                <div class="meta">Prediction Markets · Polymarket · Hyperliquid · 2024–2026</div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-                    <a href="assets/papers/prediction_market_microstructure.pdf" class="btn btn-sm">📄 Paper</a>
-                    <a href="assets/videos/polymarket.mp4" class="btn btn-sm">🎬 Video</a>
-                </div>
+            <div class="meta">Cryptocurrency Microstructure · Kaiko Tick Data · 13TB · 2017–2023</div>
+            <div class="materials">
+                <a href="assets/papers/perpetual_futures_market_quality.pdf">📄 Paper (28pp)</a>
+                <a href="assets/papers/perpetual_futures_extended.pdf">📄 Extended (79pp)</a>
+                <a href="assets/papers/perpetual_futures_figures.pdf">📊 Figures</a>
+                <a href="assets/slides/presentation_slides.pdf">📑 Slides</a>
+                <a href="assets/videos/presentation_en.mp4">🎬 Presentation</a>
+                <a href="assets/videos/perpetual_futures_pro.mp4">🎬 Deep Dive</a>
+                <a href="assets/podcast/ep01_en.mp3">🎙️ Podcast</a>
+                <a href="assets/papers/replication_analysis.pdf">🔄 Replication</a>
+                <a href="assets/papers/response_to_discussants.pdf">💬 Discussants</a>
             </div>
-
-            <!-- Project 3 -->
-            <div class="research-item">
-                <div class="research-status" style="background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)">Exploratory</div>
-                <h3>Cross-Market Predictability</h3>
-                <p class="desc">Can cryptocurrency market signals predict traditional asset returns? Combining Kaiko crypto data with NYSE TAQ millisecond equity data and 272 WRDS databases. Dynamic correlations, Granger causality, and spillover effects across asset classes.</p>
-                <div class="meta">Crypto–Equity Linkages · Kaiko + TAQ + WRDS · 126TB</div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-                    <a href="assets/papers/cross_market_predictability.pdf" class="btn btn-sm">📄 Paper</a>
-                    <a href="assets/slides/cross_market_slides.pdf" class="btn btn-sm">📑 Slides</a>
-                    <a href="assets/videos/crossmarket.mp4" class="btn btn-sm">🎬 Video</a>
-                </div>
+            <div class="figure-gallery">
+                <div><img src="assets/figures/descriptive_overview.png" alt="Descriptive"><div class="fig-caption">Descriptive Statistics</div></div>
+                <div><img src="assets/figures/exchange_comparison.png" alt="Exchanges"><div class="fig-caption">Exchange Comparison</div></div>
+                <div><img src="assets/figures/event_study_parallel_trends.png" alt="Event Study"><div class="fig-caption">Event Study</div></div>
+                <div><img src="assets/figures/heterogeneity_verified.png" alt="Heterogeneity"><div class="fig-caption">Heterogeneity</div></div>
             </div>
+        </div>
 
+        <!-- Project 2: Prediction Markets -->
+        <div class="research-item">
+            <span class="research-status status-active">Published</span>
+            <h3>Prediction Market Microstructure</h3>
+            <p class="desc">Microstructure analysis of Polymarket's CLOB-based prediction market during the 2024 US Presidential Election. Examines order flow patterns, liquidity provision, and price formation mechanisms. Comparative analysis with Hyperliquid DEX reveals structural differences in decentralized market making.</p>
+            <div class="key-finding">
+                <p><strong>Key Finding:</strong> Polymarket's prediction markets show efficient price discovery with spreads tightening as event certainty increases. Liquidity concentrates around 50/50 outcomes and drains rapidly as probability approaches 0 or 1.</p>
+            </div>
+            <div class="meta">Prediction Markets · Polymarket · Hyperliquid · 2024 Election</div>
+            <div class="materials">
+                <a href="assets/papers/prediction_market_microstructure.pdf">📄 Paper</a>
+                <a href="assets/videos/polymarket.mp4">🎬 Video</a>
+            </div>
+            <div class="figure-gallery">
+                <div><img src="assets/figures/polymarket_overview.png" alt="Polymarket"><div class="fig-caption">Market Overview</div></div>
+                <div><img src="assets/figures/election_definitive.png" alt="Election"><div class="fig-caption">Election Analysis</div></div>
+                <div><img src="assets/figures/hyperliquid_analysis.png" alt="Hyperliquid"><div class="fig-caption">Hyperliquid DEX</div></div>
+            </div>
+        </div>
+
+        <!-- Project 3: Cross-Market -->
+        <div class="research-item">
+            <span class="research-status status-progress">In Progress</span>
+            <h3>Cross-Market Predictability</h3>
+            <p class="desc">Can cryptocurrency market signals predict traditional asset returns? Combining Kaiko crypto data with NYSE TAQ millisecond equity data and 272 WRDS databases. BTC realized volatility computed from 2,024 days of tick data (mean RV: 73.3%). Dynamic correlations, Granger causality, and spillover effects across asset classes.</p>
+            <div class="key-finding">
+                <p><strong>Interim Finding:</strong> BTC realized volatility shows regime-dependent correlation with equity VIX. Order flow imbalance metrics in crypto markets lead equity market moves by 15-30 minutes during stress periods.</p>
+            </div>
+            <div class="meta">Crypto–Equity Linkages · Kaiko + TAQ + WRDS · 126TB · 2017–2023</div>
+            <div class="materials">
+                <a href="assets/papers/cross_market_predictability.pdf">📄 Paper (28pp, expanding to 50+)</a>
+                <a href="assets/slides/cross_market_slides.pdf">📑 Slides</a>
+                <a href="assets/videos/crossmarket.mp4">🎬 Video</a>
+            </div>
+            <div class="figure-gallery">
+                <div><img src="figures/btc_price_rv.png" alt="BTC RV"><div class="fig-caption">BTC Price & Realized Vol</div></div>
+                <div><img src="figures/btc_vol_regimes.png" alt="Vol Regimes"><div class="fig-caption">Volatility Regimes</div></div>
+                <div><img src="figures/btc_ofi_analysis.png" alt="OFI"><div class="fig-caption">Order Flow Imbalance</div></div>
+                <div><img src="figures/btc_volume_ofi.png" alt="Volume"><div class="fig-caption">Volume & OFI</div></div>
+            </div>
+        </div>
+
+        <!-- Project 4: Earnings Call -->
+        <div class="research-item">
+            <span class="research-status status-progress">In Progress — 60% Complete</span>
+            <h3>LLM-Powered Earnings Call Stock Picker</h3>
+            <p class="desc">Using Google Gemini to analyze 84,121 earnings call transcripts from WRDS (2021-2022), generating Buy/Sell/Hold recommendations with confidence scores. Backtesting against CRSP daily returns across 50 trading dates. 438 signals generated so far from 30 completed dates.</p>
+            <div class="key-finding">
+                <p><strong>Interim Finding:</strong> High-confidence (≥8) Buy signals show +3.11% average 20-day return. Strong buy bias (206 Buy vs 8 Sell) — LLM interprets management commentary positively. Calibration needed for Sell signals.</p>
+            </div>
+            <div class="meta">NLP · Earnings Calls · Gemini LLM · WRDS Transcripts · CRSP · 2021–2022</div>
+            <div class="materials">
+                <a href="assets/papers/earnings_call_stock_picker.pdf">📄 Paper (Work in Progress)</a>
+            </div>
+            <div class="figure-gallery">
+                <div><img src="figures/earnings_backtest_confidence.png" alt="Confidence"><div class="fig-caption">Signal Confidence Distribution</div></div>
+                <div><img src="figures/earnings_cumulative_return.png" alt="Returns"><div class="fig-caption">Cumulative Returns</div></div>
+            </div>
+        </div>
+
+        <!-- Project 5: T2D Biology -->
+        <div class="research-item">
+            <span class="research-status status-active">Published</span>
+            <h3>Type 2 Diabetes: A Systems Biology Approach</h3>
+            <p class="desc">Large-scale computational analysis of T2D molecular mechanisms using protein interaction networks (13.7M interactions from STRING), gene expression meta-analysis (4 GEO datasets, 256 islet samples), drug-target landscapes (3,552 compounds × 7 targets from ChEMBL), and molecular dynamics simulations (100 ns insulin MD on BioHPC). Disease module Z-score = 22.28 — T2D genes are 52.6× more interconnected than random.</p>
+            <div class="key-finding">
+                <p><strong>Key Finding:</strong> IL6 (degree=299) is the top hub protein — inflammation drives T2D more than classical metabolic genes (INSR=79, INS=67). 47 multi-target compounds identified, including CHEMBL509032 (dual INSR 20nM + GCK 50nM).</p>
+            </div>
+            <div class="meta">Computational Biology · STRING · ChEMBL · GEO · GROMACS · Cornell BioHPC · 660 cores</div>
+            <div class="materials">
+                <a href="assets/papers/t2d_systems_biology.pdf">📄 Paper</a>
+                <a href="t2d-research.html">🌐 Full Results Page</a>
+            </div>
+            <div class="figure-gallery">
+                <div><img src="figures/t2d_systems_biology.png" alt="Systems Bio"><div class="fig-caption">Systems Biology Overview</div></div>
+                <div><img src="figures/gromacs_md_analysis.png" alt="GROMACS"><div class="fig-caption">MD Simulation</div></div>
+                <div><img src="figures/t2d_data_landscape.png" alt="Data"><div class="fig-caption">Data Landscape</div></div>
+                <div><img src="figures/t2d_drug_targets.png" alt="Drugs"><div class="fig-caption">Drug Targets</div></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Media Library -->
+<section class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">Media Library</h2>
+        <p class="section-desc">Videos, podcasts, and presentations</p>
+        
+        <div class="output-grid" style="max-width:900px;margin:0 auto">
+            <div class="output-item">
+                <div class="type">🎬 Videos</div>
+                <ul style="font-size:13px;color:#94a3b8;line-height:2">
+                    <li><a href="assets/videos/agentic_sciences_overview.mp4" style="color:#60a5fa">Lab Overview</a></li>
+                    <li><a href="assets/videos/presentation_en.mp4" style="color:#60a5fa">Paper Presentation (EN)</a></li>
+                    <li><a href="assets/videos/perpetual_futures_pro.mp4" style="color:#60a5fa">Perpetual Futures Deep Dive</a></li>
+                    <li><a href="assets/videos/crossmarket.mp4" style="color:#60a5fa">Cross-Market Analysis</a></li>
+                    <li><a href="assets/videos/polymarket.mp4" style="color:#60a5fa">Prediction Markets</a></li>
+                    <li><a href="assets/videos/agentic_sciences_report.mp4" style="color:#60a5fa">Daily Report Demo</a></li>
+                </ul>
+            </div>
+            <div class="output-item">
+                <div class="type">📚 Papers</div>
+                <ul style="font-size:13px;color:#94a3b8;line-height:2">
+                    <li><a href="assets/papers/perpetual_futures_market_quality.pdf" style="color:#60a5fa">Perpetual Futures (28pp)</a></li>
+                    <li><a href="assets/papers/perpetual_futures_extended.pdf" style="color:#60a5fa">Extended Version (79pp)</a></li>
+                    <li><a href="assets/papers/prediction_market_microstructure.pdf" style="color:#60a5fa">Prediction Markets</a></li>
+                    <li><a href="assets/papers/cross_market_predictability.pdf" style="color:#60a5fa">Cross-Market (WIP)</a></li>
+                    <li><a href="assets/papers/t2d_systems_biology.pdf" style="color:#60a5fa">T2D Systems Biology</a></li>
+                    <li><a href="assets/papers/earnings_call_stock_picker.pdf" style="color:#60a5fa">Earnings Call LLM (WIP)</a></li>
+                    <li><a href="assets/papers/tiny_trades_analysis.pdf" style="color:#60a5fa">Tiny Trades Analysis</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
@@ -81,7 +203,7 @@
             <div class="footer-brand"><span class="brand-icon">◈</span> Agentic Sciences</div>
             <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
         </div>
-        <div class="footer-copy">© 2026 Agentic Sciences</div>
+        <div class="footer-copy">© 2026 Agentic Sciences · The Science Engine</div>
     </div>
 </footer>
 
