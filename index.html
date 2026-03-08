@@ -5,80 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentic Sciences — The Science Engine</title>
     <link rel="canonical" href="https://agentic-sciences.github.io/" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .triangle-container {
-            max-width: 900px; margin: 40px auto; position: relative;
-            height: 420px;
-        }
-        .triangle-node {
-            position: absolute; width: 240px; text-align: center;
-            background: rgba(30,58,95,0.6); border: 1px solid #1e3a5f;
-            border-radius: 12px; padding: 20px; backdrop-filter: blur(10px);
-        }
-        .triangle-node h3 { color: #60a5fa; margin: 0 0 8px; font-size: 18px; }
-        .triangle-node p { color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0; }
-        .triangle-node .icon { font-size: 32px; margin-bottom: 8px; }
-        .node-top { top: 0; left: 50%; transform: translateX(-50%); }
-        .node-left { bottom: 0; left: 5%; }
-        .node-right { bottom: 0; right: 5%; }
-        .triangle-svg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: -1;
-        }
-        .triangle-center {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -20%);
-            text-align: center;
-        }
-        .triangle-center .engine-label {
-            font-size: 14px; color: #f59e0b; font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-        }
-        .triangle-center .engine-icon { font-size: 36px; margin-bottom: 4px; }
-        
-        .pillar-section { margin: 60px auto; max-width: 900px; }
-        .pillar-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-        .pillar-header .num {
-            background: #1e3a5f; color: #60a5fa; width: 40px; height: 40px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 18px;
-        }
-        .pillar-header h2 { color: #f1f5f9; margin: 0; font-size: 24px; }
-        
-        .platform-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 12px; margin: 16px 0;
-        }
-        .platform-chip {
-            background: rgba(30,58,95,0.4); border: 1px solid #1e3a5f;
-            border-radius: 8px; padding: 10px 14px; text-align: center;
-            font-size: 13px; color: #cbd5e1;
-        }
-        .platform-chip .plat-icon { font-size: 20px; display: block; margin-bottom: 4px; }
-        
-        .flow-arrow { text-align: center; color: #475569; font-size: 24px; margin: 8px 0; }
-        .flow-box {
-            background: rgba(30,58,95,0.3); border: 1px solid #1e3a5f;
-            border-radius: 8px; padding: 16px 20px; margin: 12px 0;
-            color: #94a3b8; font-size: 14px; line-height: 1.8;
-        }
-        .flow-box strong { color: #f1f5f9; }
-
-        @media (max-width: 768px) {
-            .triangle-container { height: auto; display: flex; flex-direction: column; gap: 16px; align-items: center; }
-            .triangle-node { position: static; transform: none; width: 90%; }
-            .triangle-svg, .triangle-center { display: none; }
-        }
+        .triangle-wrap { max-width: 720px; margin: 32px auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .pillar { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; }
+        .pillar .icon { font-size: 28px; margin-bottom: 10px; }
+        .pillar h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .pillar p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+        .engine-tag { text-align: center; margin: 24px 0 0; font-size: 12px; color: var(--text-muted); letter-spacing: 1px; }
+        .founder-row { display: flex; gap: 24px; align-items: flex-start; }
+        .founder-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .founder-info h3 { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+        .founder-info .role { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+        .founder-info p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+        .founder-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .chip { font-size: 12px; padding: 4px 12px; border: 1px solid var(--border); border-radius: 20px; color: var(--text-secondary); }
+        @media (max-width: 640px) { .triangle-wrap { grid-template-columns: 1fr; } .founder-row { flex-direction: column; align-items: center; text-align: center; } }
     </style>
 </head>
 <body>
 
 <nav class="nav">
     <div class="nav-inner">
-        <a href="index.html" class="nav-brand">
-            <span class="brand-icon">◈</span> Agentic Sciences
-        </a>
+        <a href="index.html" class="nav-brand">Agentic Sciences</a>
         <div class="nav-links">
             <a href="index.html" class="active">Home</a>
             <a href="architecture.html">Architecture</a>
@@ -87,158 +38,41 @@
     </div>
 </nav>
 
-<!-- Hero -->
 <section class="hero">
-    <div class="container">
-        <div class="hero-badge">The Science Engine</div>
-        <h1>Agentic Sciences</h1>
-        <p class="hero-subtitle">Research. Content. Capital.</p>
-        <p style="font-size:20px;font-weight:400;color:#94a3b8;margin-top:12px;max-width:700px;margin-left:auto;margin-right:auto">
-            An AI-driven research lab that discovers insights from data, communicates findings to the world, and monetizes discoveries in financial markets.
-        </p>
-        <div class="hero-cta">
-            <a href="research.html" class="btn btn-primary">View Research →</a>
-            <a href="architecture.html" class="btn btn-secondary">System Architecture →</a>
-        </div>
+    <span class="hero-badge">The Science Engine</span>
+    <h1>Agentic Sciences</h1>
+    <p class="hero-subtitle">Research · Content · Capital</p>
+    <p style="font-size:15px;color:var(--text-muted);max-width:560px;margin:12px auto 0">
+        An AI-driven research lab that discovers insights from data, communicates findings to the world, and monetizes discoveries in financial markets.
+    </p>
+    <div class="hero-cta">
+        <a href="research.html" class="btn btn-primary">View Research →</a>
+        <a href="architecture.html" class="btn btn-secondary">Architecture →</a>
     </div>
 </section>
 
-<!-- The Science Engine Triangle -->
-<section class="section">
+<!-- Three Pillars -->
+<section class="section section-alt">
     <div class="container">
-        <h2 class="section-title">The Science Engine</h2>
-        <p class="section-desc">Three pillars forming an autonomous closed-loop system</p>
-        
-        <div class="triangle-container">
-            <svg class="triangle-svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.4"/>
-                        <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:0.6"/>
-                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.4"/>
-                    </linearGradient>
-                </defs>
-                <!-- Triangle lines -->
-                <line x1="450" y1="60" x2="120" y2="340" stroke="url(#lineGrad)" stroke-width="1.5"/>
-                <line x1="450" y1="60" x2="780" y2="340" stroke="url(#lineGrad)" stroke-width="1.5"/>
-                <line x1="120" y1="340" x2="780" y2="340" stroke="url(#lineGrad)" stroke-width="1.5"/>
-                <!-- Center glow -->
-                <circle cx="450" cy="240" r="40" fill="#f59e0b" opacity="0.08"/>
-                <circle cx="450" cy="240" r="20" fill="#f59e0b" opacity="0.12"/>
-            </svg>
-            
-            <div class="triangle-node node-top">
+        <h2 class="section-title" style="text-align:center">Three Pillars</h2>
+        <div class="triangle-wrap">
+            <div class="pillar">
                 <div class="icon">🔬</div>
-                <h3>Research & Computation</h3>
-                <p>126TB data · 860 CPU cores · Multi-model AI orchestration · Daily autonomous discovery</p>
+                <h3>Research</h3>
+                <p>126TB data · 860 CPU cores · Multi-model AI · Daily autonomous discovery</p>
             </div>
-            <div class="triangle-node node-left">
+            <div class="pillar">
                 <div class="icon">📢</div>
-                <h3>Content Output</h3>
+                <h3>Content</h3>
                 <p>Papers · Videos · Podcasts · X · LinkedIn · Telegram · Substack</p>
             </div>
-            <div class="triangle-node node-right">
+            <div class="pillar">
                 <div class="icon">💰</div>
-                <h3>Trading & Capital</h3>
+                <h3>Capital</h3>
                 <p>Signal generation · Multi-platform execution · Crypto + Equities + Futures</p>
             </div>
-            
-            <div class="triangle-center">
-                <div class="engine-icon">⚡</div>
-                <div class="engine-label">Science Engine</div>
-            </div>
         </div>
-    </div>
-</section>
-
-<!-- Pillar 1: Research -->
-<section class="section section-alt">
-    <div class="container">
-        <div class="pillar-section">
-            <div class="pillar-header">
-                <div class="num">1</div>
-                <h2>Research & Computation</h2>
-            </div>
-            <div class="flow-box">
-                <strong>Pipeline:</strong> Voice/Text Input → AI Transcription (Gemini Flash) → 
-                Research Orchestration (Claude Opus) → Data Processing → Analysis → Discovery
-            </div>
-            <div class="platform-grid">
-                <div class="platform-chip"><span class="plat-icon">🖥️</span>Cornell JCB Servers</div>
-                <div class="platform-chip"><span class="plat-icon">🧬</span>Cornell BioHPC</div>
-                <div class="platform-chip"><span class="plat-icon">☁️</span>Tencent Cloud</div>
-                <div class="platform-chip"><span class="plat-icon">📚</span>arXiv / PubMed</div>
-                <div class="platform-chip"><span class="plat-icon">🔍</span>OpenAlex / Scholar</div>
-                <div class="platform-chip"><span class="plat-icon">📊</span>WRDS / CRSP / TAQ</div>
-                <div class="platform-chip"><span class="plat-icon">₿</span>Kaiko / 64 Exchanges</div>
-                <div class="platform-chip"><span class="plat-icon">🤖</span>Gemini + Claude AI</div>
-            </div>
-            <p style="color:#94a3b8;font-size:14px;margin-top:16px">
-                <strong style="color:#f1f5f9">Active Research:</strong> 
-                Cross-market predictability · T2D computational biology · LLM earnings call analysis · 
-                Protein interaction networks · Molecular dynamics · Drug discovery
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Pillar 2: Content -->
-<section class="section">
-    <div class="container">
-        <div class="pillar-section">
-            <div class="pillar-header">
-                <div class="num">2</div>
-                <h2>Content Output</h2>
-            </div>
-            <div class="flow-box">
-                <strong>Pipeline:</strong> Research Discovery → Multi-modal Content Generation → 
-                Automated Publishing → Audience Building → Feedback Loop
-            </div>
-            <div class="platform-grid">
-                <div class="platform-chip"><span class="plat-icon">🌐</span>Agentic Sciences Site</div>
-                <div class="platform-chip"><span class="plat-icon">👤</span>Personal Website</div>
-                <div class="platform-chip"><span class="plat-icon">𝕏</span>X (Twitter)</div>
-                <div class="platform-chip"><span class="plat-icon">💼</span>LinkedIn</div>
-                <div class="platform-chip"><span class="plat-icon">✈️</span>Telegram Channel</div>
-                <div class="platform-chip"><span class="plat-icon">📰</span>Substack</div>
-            </div>
-            <p style="color:#94a3b8;font-size:14px;margin-top:16px">
-                <strong style="color:#f1f5f9">Content Types:</strong> 
-                Research papers (PDF) · Data visualizations · Video presentations · 
-                Podcast episodes · Twitter threads · Newsletter articles · Slide decks
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Pillar 3: Trading -->
-<section class="section section-alt">
-    <div class="container">
-        <div class="pillar-section">
-            <div class="pillar-header">
-                <div class="num">3</div>
-                <h2>Trading & Capital</h2>
-            </div>
-            <div class="flow-box">
-                <strong>Pipeline:</strong> Research Signals → Confidence Filtering → 
-                Risk Management → API Execution → P&L Tracking → Research Feedback
-            </div>
-            <div class="platform-grid">
-                <div class="platform-chip"><span class="plat-icon">₿</span>Binance</div>
-                <div class="platform-chip"><span class="plat-icon">⚡</span>Hyperliquid</div>
-                <div class="platform-chip"><span class="plat-icon">🪶</span>Robinhood</div>
-                <div class="platform-chip"><span class="plat-icon">🐯</span>Futu (富途)</div>
-                <div class="platform-chip"><span class="plat-icon">🏛️</span>Interactive Brokers</div>
-                <div class="platform-chip"><span class="plat-icon">📈</span>同花顺</div>
-                <div class="platform-chip"><span class="plat-icon">📉</span>南华期货</div>
-                <div class="platform-chip"><span class="plat-icon">🔗</span>OKX / Bybit</div>
-            </div>
-            <p style="color:#94a3b8;font-size:14px;margin-top:16px">
-                <strong style="color:#f1f5f9">Markets:</strong> 
-                Crypto spot & derivatives · US equities & options · 
-                HK/China A-shares · Commodity futures · DeFi protocols
-            </p>
-        </div>
+        <div class="engine-tag">Data → Insight → Content → Capital → Data</div>
     </div>
 </section>
 
@@ -246,82 +80,11 @@
 <section class="section">
     <div class="container">
         <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-number">126TB</div>
-                <div class="stat-label">On-Premise Data</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">860</div>
-                <div class="stat-label">CPU Cores</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">64</div>
-                <div class="stat-label">Crypto Exchanges</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Academic APIs</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Autonomous</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Overview Video & Podcast -->
-<section class="section section-alt">
-    <div class="container">
-        <h2 class="section-title">Overview</h2>
-        <p class="section-desc">Learn about Agentic Sciences</p>
-        <div class="output-grid" style="max-width:900px;margin:0 auto">
-            <div class="output-item">
-                <div class="type">🎬 Video</div>
-                <h3>Lab Overview</h3>
-                <p style="font-size:12px;color:#64748b">Infrastructure, pipeline, and research projects</p>
-                <video controls style="width:100%;border-radius:8px;margin-top:8px;background:#000">
-                    <source src="assets/videos/agentic_sciences_overview.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="output-item">
-                <div class="type">🎙️ Podcast</div>
-                <h3>Episode 1: Who We Are</h3>
-                <p style="font-size:12px;color:#64748b">Lab introduction and research overview</p>
-                <audio controls style="width:100%;margin-top:12px">
-                    <source src="assets/podcast/ep01_en.mp3" type="audio/mpeg">
-                </audio>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Founder -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title">Founder</h2>
-        <div class="arch-block" style="max-width:700px;margin:0 auto;display:flex;gap:28px;align-items:flex-start">
-            <div style="min-width:100px;text-align:center">
-                <img src="img/founder.jpeg" alt="Qihong Ruan" 
-                     style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid #1e3a5f"
-                     onerror="this.style.display='none'">
-            </div>
-            <div>
-                <h3 style="font-size:20px;color:#f1f5f9;margin-bottom:4px">Qihong Ruan</h3>
-                <p style="font-size:14px;color:#60a5fa;margin-bottom:12px">Founder & Lead Researcher</p>
-                <p style="font-size:14px;color:#94a3b8;line-height:1.8">
-                    Quantitative finance researcher at Cornell University's Johnson School of Business. 
-                    Research spans market microstructure, cryptocurrency derivatives, computational biology, 
-                    and AI-driven scientific discovery. Built the Agentic Sciences autonomous research pipeline 
-                    from the ground up — from 126TB data infrastructure to multi-model AI orchestration.
-                </p>
-                <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
-                    <a href="https://x.com/Qihong53030163" class="btn btn-sm">𝕏 Twitter</a>
-                    <a href="https://qihongruan.github.io" class="btn btn-sm">Personal Site</a>
-                    <a href="https://www.linkedin.com/in/qihong-ruan/" class="btn btn-sm">LinkedIn</a>
-                    <a href="https://github.com/QihongRuan" class="btn btn-sm">GitHub</a>
-                </div>
-            </div>
+            <div class="stat"><div class="stat-number">126TB</div><div class="stat-label">On-Premise Data</div></div>
+            <div class="stat"><div class="stat-number">860</div><div class="stat-label">CPU Cores</div></div>
+            <div class="stat"><div class="stat-number">64</div><div class="stat-label">Crypto Exchanges</div></div>
+            <div class="stat"><div class="stat-number">15+</div><div class="stat-label">Academic APIs</div></div>
+            <div class="stat"><div class="stat-number">24/7</div><div class="stat-label">Autonomous</div></div>
         </div>
     </div>
 </section>
@@ -339,41 +102,75 @@
             <div class="card">
                 <div class="card-icon">🔗</div>
                 <h3>Crypto Derivatives</h3>
-                <p>Perpetual futures, funding rates, basis trades, and their impact on spot market quality.</p>
+                <p>Perpetual futures, funding rates, basis trades, and spot market quality impact.</p>
             </div>
             <div class="card">
                 <div class="card-icon">🧬</div>
                 <h3>Computational Biology</h3>
-                <p>T2D systems biology, protein interaction networks, molecular dynamics, drug discovery.</p>
+                <p>T2D systems biology, protein networks, molecular dynamics, drug discovery.</p>
             </div>
             <div class="card">
                 <div class="card-icon">🌐</div>
                 <h3>Cross-Market Signals</h3>
-                <p>Crypto-equity linkages, earnings call NLP, spillover effects, cross-asset predictability.</p>
+                <p>Crypto-equity linkages, earnings call NLP, cross-asset predictability.</p>
             </div>
         </div>
-        <div class="more-link">
-            <a href="research.html">See all research projects →</a>
+        <div class="more-link"><a href="research.html">See all research →</a></div>
+    </div>
+</section>
+
+<!-- Overview -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Overview</h2>
+        <div class="output-grid">
+            <div class="output-item">
+                <div class="type">Video</div>
+                <h3>Lab Overview</h3>
+                <video controls style="width:100%;border-radius:6px;margin-top:8px">
+                    <source src="assets/videos/agentic_sciences_overview.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="output-item">
+                <div class="type">Podcast</div>
+                <h3>Episode 1: Who We Are</h3>
+                <audio controls style="width:100%;margin-top:12px">
+                    <source src="assets/podcast/ep01_en.mp3" type="audio/mpeg">
+                </audio>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
+<!-- Founder -->
+<section class="section section-alt">
     <div class="container">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <span class="brand-icon">◈</span> Agentic Sciences
+        <h2 class="section-title">Founder</h2>
+        <div class="arch-block" style="max-width:640px">
+            <div class="founder-row">
+                <img src="img/founder.jpeg" alt="Qihong Ruan" class="founder-photo" onerror="this.style.display='none'">
+                <div class="founder-info">
+                    <h3>Qihong Ruan</h3>
+                    <div class="role">Founder & Lead Researcher</div>
+                    <p>Quantitative finance researcher at Cornell University's Johnson School of Business. Research spans market microstructure, cryptocurrency derivatives, computational biology, and AI-driven scientific discovery.</p>
+                    <div class="founder-links">
+                        <a href="https://x.com/Qihong53030163" class="btn btn-sm">𝕏</a>
+                        <a href="https://qihongruan.github.io" class="btn btn-sm">Website</a>
+                        <a href="https://www.linkedin.com/in/qihong-ruan/" class="btn btn-sm">LinkedIn</a>
+                        <a href="https://github.com/QihongRuan" class="btn btn-sm">GitHub</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="https://github.com/Agentic-Sciences">GitHub</a>
-            </div>
-        </div>
-        <div class="footer-copy">
-            © 2026 Agentic Sciences · The Science Engine<br>
-            <span style="font-size:12px;opacity:0.5">Data → Insight → Content → Capital → Data</span>
         </div>
     </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Agentic Sciences</div>
+        <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
+    </div>
+    <div class="footer-copy">© 2026 Agentic Sciences · The Science Engine</div>
 </footer>
 
 </body>
