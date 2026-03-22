@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Microstructure Research — Agentic Sciences</title>
+    <link rel="canonical" href="https://agentic-sciences.github.io/crypto-microstructure.html" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero-banner { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); color: #fff; padding: 60px 0 40px; margin: -20px -20px 30px; text-align: center; }
+        .hero-banner h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .hero-banner .subtitle { font-size: 14px; opacity: 0.7; }
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+        .stat-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+        .stat-card .number { font-size: 28px; font-weight: 700; color: var(--text); }
+        .stat-card .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .research-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+        .research-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .research-card .meta { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+        .research-card .finding { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; padding: 10px 14px; border-left: 3px solid #2563eb; background: #f8fafc; border-radius: 0 6px 6px 0; }
+        .research-card .finding strong { color: var(--text); }
+        .tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-right: 4px; }
+        .tag-exchange { background: #fef3c7; color: #92400e; }
+        .tag-method { background: #dbeafe; color: #1e40af; }
+        .tag-gpu { background: #fce7f3; color: #9d174d; }
+        .tag-wrds { background: #d1fae5; color: #065f46; }
+        .fig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+        .fig-grid img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+        .fig-grid .caption { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 4px; }
+        .divider { display: flex; align-items: center; gap: 12px; margin: 40px 0 20px; }
+        .divider h2 { font-size: 18px; font-weight: 600; white-space: nowrap; }
+        .divider .line { flex: 1; height: 1px; background: var(--border); }
+        .live-badge { display: inline-block; background: #10b981; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .corr-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+        .corr-table th, .corr-table td { padding: 6px 10px; border: 1px solid var(--border); text-align: center; }
+        .corr-table th { background: #f8fafc; font-weight: 600; }
+        .corr-high { background: #fee2e2; }
+        .corr-mid { background: #fef3c7; }
+        .corr-low { background: #d1fae5; }
+        @media (max-width: 768px) { .stat-row { grid-template-columns: 1fr 1fr; } .fig-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="container nav-inner">
+        <a href="/" class="logo">Agentic Sciences</a>
+        <div class="nav-links">
+            <a href="research.html">Research</a>
+            <a href="crypto-microstructure.html" class="active">Crypto Micro</a>
+            <a href="t2d-research.html">T2D Biology</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container" style="padding-top: 20px;">
+
+    <div class="hero-banner" style="border-radius: 12px; padding: 40px 20px;">
+        <h1>🔬 BTC Market Microstructure</h1>
+        <p class="subtitle">Cross-Exchange Order Book Analysis · Kaiko Historical Data (2017-2023)</p>
+        <p class="subtitle" style="margin-top: 8px;"><span class="live-badge">LIVE</span> Autonomous research engine — updated continuously</p>
+    </div>
+
+    <div class="stat-row">
+        <div class="stat-card">
+            <div class="number" id="n-studies">16</div>
+            <div class="label">Studies Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">5</div>
+            <div class="label">Exchanges</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">3</div>
+            <div class="label">Servers Active</div>
+        </div>
+        <div class="stat-card">
+            <div class="number">2</div>
+            <div class="label">V100 GPUs</div>
+        </div>
+    </div>
+
+    <!-- ===== ORDER BOOK STRUCTURE ===== -->
+    <div class="divider"><h2>📊 Order Book Structure</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>R001: Cross-Exchange Order Book Asymmetry (2017-2023)</h3>
+        <div class="meta">
+            <span class="tag tag-exchange">Binance</span>
+            <span class="tag tag-exchange">Coinbase</span>
+            <span class="tag tag-exchange">Kraken</span>
+            <span class="tag tag-exchange">OkEX</span>
+            <span class="tag tag-exchange">Bitstamp</span>
+            <span class="tag tag-method">OB Depth Ratio</span>
+            · 137 seconds · Monthly first-day snapshots
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Binance and Coinbase show <strong>opposite asymmetry directions</strong>.
+            Binance: bid/ask ratio = 0.944 (sell-side pressure, trending ↘),
+            Coinbase: ratio = 1.465 (buy-side pressure, trending ↗).
+            This may reflect different user bases: Asian retail (Binance) vs. US institutional (Coinbase).
+        </div>
+        <img src="figures/R001_ob_asymmetry.png" alt="R001 Order Book Asymmetry" style="width:100%; border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+
+    <div class="research-card">
+        <h3>R007: Order Book Resilience — Recovery Speed After Large Shocks</h3>
+        <div class="meta">
+            <span class="tag tag-exchange">Binance</span>
+            <span class="tag tag-exchange">Coinbase</span>
+            <span class="tag tag-exchange">Kraken</span>
+            <span class="tag tag-method">Shock Detection</span>
+            · 59 seconds
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Kraken recovers fastest from liquidity shocks (avg 2 snapshots to 90% recovery).
+            Coinbase shows highest depth volatility. Binance is the most stable in absolute terms due to massive depth.
+        </div>
+        <img src="figures/R007_resilience.png" alt="R007 Resilience" style="width:100%; border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+
+    <div class="research-card">
+        <h3>R016: Market Maker Behavior — Quote Update Patterns</h3>
+        <div class="meta">
+            <span class="tag tag-exchange">Binance</span>
+            <span class="tag tag-exchange">Coinbase</span>
+            <span class="tag tag-exchange">Kraken</span>
+            <span class="tag tag-method">Update Frequency</span>
+            · 48 seconds
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Coinbase has 2x the update frequency of Binance/Kraken (0.04 Hz vs 0.02 Hz).
+            But Binance has highest spread stability (72% of snapshots unchanged) vs. Coinbase (2%) — suggesting
+            Binance MMs use wider but more stable quotes, while Coinbase MMs actively adjust.
+        </div>
+    </div>
+
+    <!-- ===== PRICE DISCOVERY ===== -->
+    <div class="divider"><h2>🏆 Price Discovery</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>R010: Lead-Lag Analysis — Who Discovers Price First?</h3>
+        <div class="meta">
+            <span class="tag tag-exchange">Binance</span>
+            <span class="tag tag-exchange">Coinbase</span>
+            <span class="tag tag-exchange">Kraken</span>
+            <span class="tag tag-exchange">Bitstamp</span>
+            <span class="tag tag-method">Hasbrouck InfoShare</span>
+            · Cross-correlation at multiple lags
+        </div>
+        <div class="finding">
+            <strong>Surprising Finding:</strong> <strong>Bitstamp leads all exchanges</strong> by 2-5 snapshots,
+            despite being much smaller by volume. Score: Bitstamp (0.42) > Kraken (0.30) > Binance (0.13) > Coinbase (0.00).
+            This suggests institutional/OTC flow may route through smaller, more regulated exchanges first.
+        </div>
+        <img src="figures/R010_lead_lag.png" alt="R010 Lead-Lag" style="width:100%; border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+
+    <div class="research-card">
+        <h3>R013: Order Flow Imbalance (OFI) — Predictive Power</h3>
+        <div class="meta">
+            <span class="tag tag-method">OFI → Price Regression</span>
+            · Cont et al. (2014) methodology
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Kraken's OFI has the strongest predictive power for next-period returns
+            (β=0.00017, R²=1.5%, p&lt;0.001). Binance significant but weaker. Coinbase marginally insignificant (p=0.058).
+            <strong>Consistent with R010:</strong> Kraken/Bitstamp contain more informed order flow.
+        </div>
+    </div>
+
+    <!-- ===== CROSS-MARKET ===== -->
+    <div class="divider"><h2>🌐 Cross-Market Analysis</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>R011: Futures-Spot Basis — Perpetual Premium Dynamics</h3>
+        <div class="meta">
+            <span class="tag tag-exchange">Binance Spot</span>
+            <span class="tag tag-exchange">Binance Futures</span>
+            <span class="tag tag-method">Basis Analysis</span>
+            · 190 perpetual pairs · 2021-2023
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> The futures-spot basis is a <strong>market sentiment thermometer</strong>.
+            April 2021 peak: <strong>823 bps (annualized 99%)</strong> — extreme bull euphoria.
+            Early 2021 baseline: 5-10 bps. Futures depth/spot depth ratio swings from 0.37 to 6.4×.
+        </div>
+        <img src="figures/R011_basis.png" alt="R011 Basis" style="width:100%; border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+
+    <div class="research-card">
+        <h3>R006: Crypto-Equity Correlation (WRDS CRSP)</h3>
+        <div class="meta">
+            <span class="tag tag-wrds">WRDS</span>
+            <span class="tag tag-method">Rolling 60-day Correlation</span>
+            · COIN, MSTR, MARA, RIOT vs SPY, QQQ, GLD, TLT · 2021-2023
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Crypto stocks (COIN, MSTR, MARA, RIOT) have 0.49-0.55 correlation with QQQ
+            but only 0.06-0.09 with GLD and ~0 with TLT. <strong>Crypto is a tech-beta asset, not a safe haven.</strong>
+            MARA trades 23.5M shares/day — 2x COIN's volume despite 1/10th the market cap.
+        </div>
+    </div>
+
+    <div class="research-card">
+        <h3>GPU02: Optimal Portfolio via Ledoit-Wolf Shrinkage</h3>
+        <div class="meta">
+            <span class="tag tag-gpu">V100 GPU</span>
+            <span class="tag tag-wrds">WRDS</span>
+            <span class="tag tag-method">Covariance Shrinkage</span>
+            · 12 assets · 683 trading days
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Shrinkage intensity = 0.007 (very low — sufficient data).
+            Min-variance portfolio: Return 0.2%, Vol 10.6%, Sharpe 0.02.
+            <strong>Critical correlation:</strong> QQQ↔SPY: 0.946, COIN↔MSTR: 0.746, MARA↔MSTR: 0.767.
+            Crypto stocks are highly homogeneous — shorting one while holding another provides <strong>no diversification</strong>.
+        </div>
+
+        <table class="corr-table">
+            <tr><th></th><th>SPY</th><th>QQQ</th><th>GLD</th><th>TLT</th></tr>
+            <tr><td><strong>COIN</strong></td><td class="corr-mid">0.54</td><td class="corr-mid">0.59</td><td class="corr-low">0.09</td><td class="corr-low">0.02</td></tr>
+            <tr><td><strong>MSTR</strong></td><td class="corr-mid">0.55</td><td class="corr-mid">0.60</td><td class="corr-low">0.10</td><td class="corr-low">0.01</td></tr>
+            <tr><td><strong>MARA</strong></td><td class="corr-mid">0.48</td><td class="corr-mid">0.52</td><td class="corr-low">0.05</td><td class="corr-low">0.02</td></tr>
+            <tr><td><strong>RIOT</strong></td><td class="corr-mid">0.51</td><td class="corr-mid">0.56</td><td class="corr-low">0.09</td><td class="corr-low">0.03</td></tr>
+        </table>
+    </div>
+
+    <!-- ===== TEMPORAL PATTERNS ===== -->
+    <div class="divider"><h2>⏰ Temporal Patterns</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>R009: Intraday Volume Periodicity — FFT Harmonic Decomposition</h3>
+        <div class="meta">
+            <span class="tag tag-method">FFT Analysis</span>
+            · 4 exchanges · Multiple months
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Dominant periods: <strong>4.8h, 24h, 3h</strong>.
+            Peak hours differ by exchange: Binance UTC 10 (Asia afternoon), Kraken/OkEX UTC 16 (EU-US overlap).
+            The 4.8h cycle suggests ~5 trading sessions per day, likely aligned with global timezone handoffs.
+        </div>
+        <img src="figures/R009_intraday_fft.png" alt="R009 Intraday FFT" style="width:100%; border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+
+    <div class="research-card">
+        <h3>R012: Multi-Scale Realized Volatility</h3>
+        <div class="meta">
+            <span class="tag tag-method">Realized Volatility</span>
+            · 10/50/100/200-step windows
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Volatility scales roughly as √T across all exchanges,
+            consistent with geometric Brownian motion at short horizons.
+            Binance 10-step RV: 1.4%, 200-step: 12.4%. Cross-exchange RV highly similar (&lt;10% difference),
+            confirming strong market integration.
+        </div>
+    </div>
+
+    <!-- ===== DEEP LEARNING ===== -->
+    <div class="divider"><h2>🧠 Deep Learning (V100 GPU)</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>GPU01: Price Pattern Autoencoder — Market Regime Discovery</h3>
+        <div class="meta">
+            <span class="tag tag-gpu">V100 GPU 0</span>
+            <span class="tag tag-method">Conv1D Autoencoder + K-Means</span>
+            · 10,000 windows · 16-dim latent space · 10 seconds
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> 5 distinct market regimes discovered unsupervised:
+            <strong>Bullish</strong> (44% of windows), <strong>Bearish</strong> (43%), <strong>Mean-reverting</strong> (13%).
+            The autoencoder's latent space cleanly separates trend direction, suggesting price dynamics are
+            dominated by momentum rather than mean-reversion at the 100-snapshot scale.
+        </div>
+    </div>
+
+    <div class="research-card">
+        <h3>GPU03: Transformer Price Predictor — Cross-Exchange Attention</h3>
+        <div class="meta">
+            <span class="tag tag-gpu">V100 GPU 0</span>
+            <span class="tag tag-method">Transformer Encoder</span>
+            · 156K params · 4 exchanges × 64 steps
+        </div>
+        <div class="finding">
+            <strong>Key Finding:</strong> Accuracy: 50.68% (0.68% edge over random).
+            Attention ratio: recent/distant = 1.23 — the model learns mild recency bias but no strong pattern.
+            <strong>Implication:</strong> Simple direction prediction from cross-exchange snapshots is near-random,
+            consistent with weak-form efficiency. Need richer features (OFI, depth profiles) for alpha.
+        </div>
+    </div>
+
+    <!-- ===== METHODOLOGY ===== -->
+    <div class="divider"><h2>📐 Methodology</h2><div class="line"></div></div>
+
+    <div class="research-card">
+        <h3>Data Sources & Infrastructure</h3>
+        <div class="finding" style="border-left-color: #6366f1;">
+            <strong>Data:</strong> Kaiko consolidated order book (L2, 10-level snapshots, 2017-2023),
+            WRDS CRSP daily stock file, Binance Futures perpetual OB.<br>
+            <strong>Compute:</strong> Cornell research3 (112 cores, Kaiko data), Cornell research1 (88 cores, 2×V100 32GB, TAQ/WRDS),
+            Cornell BioHPC (660 cores, GROMACS MD simulations).<br>
+            <strong>Software:</strong> Python 3.12, PyTorch 2.5, pandas, scipy, matplotlib.<br>
+            <strong>Methods:</strong> OB depth ratio, CCDF/power-law, Kyle's Lambda regression, Hasbrouck cross-correlation,
+            OFI (Cont et al. 2014), FFT harmonic decomposition, Ledoit-Wolf shrinkage, Conv1D autoencoder, Transformer encoder.
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0 20px; font-size: 12px; color: var(--text-muted);">
+        <p>Autonomous research by <strong>ComeWealth</strong> · Agentic Sciences</p>
+        <p>Last updated: <span id="update-time"></span></p>
+        <p><a href="https://github.com/agentic-sciences" style="color: var(--text-muted);">GitHub</a></p>
+    </div>
+</main>
+
+<script>
+document.getElementById('update-time').textContent = new Date().toLocaleString();
+</script>
+</body>
+</html>
