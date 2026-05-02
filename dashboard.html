@@ -3,312 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComeWealth Research Dashboard</title>
+    <title>Research Dashboard — Agentic Sciences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --bg: #0d1117;
-            --card: #161b22;
-            --border: #30363d;
-            --text: #c9d1d9;
-            --text-dim: #8b949e;
-            --green: #3fb950;
-            --yellow: #d29922;
-            --red: #f85149;
-            --blue: #58a6ff;
-            --purple: #bc8cff;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-        }
-        .header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .header h1 {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        .header h1 span { color: var(--blue); }
-        .header .meta {
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
-            padding: 20px 24px;
-        }
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-        }
-        .card h2 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .status-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-        .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
-        .status-dot.yellow { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
-        .status-dot.red { background: var(--red); }
-        .status-dot.blue { background: var(--blue); }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-        }
-        .stat-row:last-child { border-bottom: none; }
-        .stat-label { color: var(--text-dim); }
-        .stat-value { font-weight: 600; font-variant-numeric: tabular-nums; }
-        .stat-value.green { color: var(--green); }
-        .stat-value.yellow { color: var(--yellow); }
-        .stat-value.red { color: var(--red); }
-        .stat-value.blue { color: var(--blue); }
-        .task-list { list-style: none; }
-        .task-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .task-list li:last-child { border-bottom: none; }
-        .badge {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-        .badge.done { background: rgba(63,185,80,0.15); color: var(--green); }
-        .badge.running { background: rgba(210,153,34,0.15); color: var(--yellow); }
-        .badge.error { background: rgba(248,81,73,0.15); color: var(--red); }
-        .badge.pending { background: rgba(139,148,158,0.15); color: var(--text-dim); }
-        .figure-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-            padding: 0 24px 24px;
-        }
-        .figure-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .figure-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .figure-card .caption {
-            padding: 8px 12px;
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-        .section-title {
-            padding: 16px 24px 8px;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text);
-        }
-        .findings {
-            padding: 0 24px 24px;
-        }
-        .finding {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
-        }
-        .finding h3 {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--blue);
-        }
-        .finding p {
-            font-size: 12px;
-            color: var(--text-dim);
-            line-height: 1.5;
-        }
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; padding: 12px; }
-            .figure-grid { grid-template-columns: 1fr; padding: 0 12px 12px; }
-            .header { padding: 12px; }
-        }
+        .divider { display: flex; align-items: center; gap: 12px; margin: 40px 0 20px; }
+        .divider h2 { font-size: 18px; font-weight: 600; white-space: nowrap; }
+        .divider .line { flex: 1; height: 1px; background: var(--border); }
+        .study { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 10px; }
+        .study h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .study .id { font-size: 11px; color: var(--text-muted); font-weight: 500; background: var(--bg-subtle); padding: 2px 8px; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', monospace; }
+        .study .runtime { font-size: 11px; color: var(--text-muted); }
+        .study .desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-top: 6px; }
+        .study .finding { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-top: 8px; padding: 8px 12px; border-left: 2px solid var(--border); background: var(--bg-subtle); border-radius: 0 6px 6px 0; }
+        .study .finding strong { color: var(--text); }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 32px; }
+        .summary-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+        .summary-card .num { font-size: 28px; font-weight: 700; letter-spacing: -1px; }
+        .summary-card .label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+        .category-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-right: 4px; }
+        .cat-equity { background: #e8f5e9; color: #2e7d32; }
+        .cat-fixed { background: #e3f2fd; color: #1565c0; }
+        .cat-options { background: #fff3e0; color: #e65100; }
+        .cat-crypto { background: #fce4ec; color: #c62828; }
+        .cat-factor { background: #f3e5f5; color: #6a1b9a; }
+        .cat-micro { background: #e0f7fa; color: #00695c; }
+        .cat-corp { background: #fff8e1; color: #f57f17; }
+        .cat-other { background: #f5f5f5; color: #616161; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>💰 <span>ComeWealth</span> Research Dashboard</h1>
-        <div class="meta">Last updated: <span id="updateTime"></span> | Server: research3</div>
-    </div>
 
-    <div class="grid">
-        <!-- Overview -->
-        <div class="card">
-            <h2><span class="status-dot green"></span> Pipeline Overview</h2>
-            <div class="stat-row"><span class="stat-label">Analyses Completed</span><span class="stat-value green">9</span></div>
-            <div class="stat-row"><span class="stat-label">CSV Files</span><span class="stat-value">13</span></div>
-            <div class="stat-row"><span class="stat-label">Figures</span><span class="stat-value">11</span></div>
-            <div class="stat-row"><span class="stat-label">Exchanges Analyzed</span><span class="stat-value blue">27</span></div>
-            <div class="stat-row"><span class="stat-label">Total Runtime</span><span class="stat-value">~10 min</span></div>
-            <div class="stat-row"><span class="stat-label">Data Source</span><span class="stat-value">Kaiko OB10-v2</span></div>
-        </div>
-
-        <!-- Task Status -->
-        <div class="card">
-            <h2><span class="status-dot yellow pulse"></span> Task Status</h2>
-            <ul class="task-list">
-                <li>Quick Spread (6 exchanges) <span class="badge done">✓ 3.2s</span></li>
-                <li>Full Spread (27 exchanges) <span class="badge done">✓ 37s</span></li>
-                <li>Spot-Futures Basis (13 days) <span class="badge done">✓ 108s</span></li>
-                <li>ETH Basis + OB Imbalance <span class="badge done">✓ 51s</span></li>
-                <li>Intraday Patterns (5 days) <span class="badge done">✓ 291s</span></li>
-                <li>Market Impact (5 exchanges) <span class="badge done">✓ 6.4s</span></li>
-                <li>BTC-ETH Correlation <span class="badge done">✓ 34s</span></li>
-                <li>Order Flow Toxicity <span class="badge done">✓ 28s</span></li>
-                <li>券商中国 Scraping <span class="badge running">26/122</span></li>
-            </ul>
-        </div>
-
-        <!-- Key Metrics: Spread -->
-        <div class="card">
-            <h2>📊 BTC Spread Rankings (Top 5)</h2>
-            <div class="stat-row"><span class="stat-label">Binance</span><span class="stat-value green">0.0035 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Huobi</span><span class="stat-value green">0.0035 bps</span></div>
-            <div class="stat-row"><span class="stat-label">CoinEx</span><span class="stat-value green">0.0035 bps</span></div>
-            <div class="stat-row"><span class="stat-label">OKX</span><span class="stat-value">0.0351 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Binance Futures</span><span class="stat-value">0.0352 bps</span></div>
-        </div>
-
-        <!-- Key Metrics: Basis -->
-        <div class="card">
-            <h2>📈 Spot-Futures Basis (Binance BTC)</h2>
-            <div class="stat-row"><span class="stat-label">13-day Median</span><span class="stat-value red">-4.66 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Range</span><span class="stat-value">[-5.44, -2.67]</span></div>
-            <div class="stat-row"><span class="stat-label">Direction</span><span class="stat-value red">Backwardation</span></div>
-            <div class="stat-row"><span class="stat-label">Matched Ticks</span><span class="stat-value">5,629</span></div>
-            <div class="stat-row"><span class="stat-label">ETH Basis</span><span class="stat-value red">-3.08 to -5.47</span></div>
-        </div>
-
-        <!-- Market Impact -->
-        <div class="card">
-            <h2>💥 Market Impact ($1M Trade)</h2>
-            <div class="stat-row"><span class="stat-label">Binance Futures</span><span class="stat-value green">0.95 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Binance Spot</span><span class="stat-value green">1.85 bps</span></div>
-            <div class="stat-row"><span class="stat-label">OKX</span><span class="stat-value yellow">4.34 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Kraken</span><span class="stat-value red">17.99 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Coinbase</span><span class="stat-value red">22.52 bps</span></div>
-        </div>
-
-        <!-- Correlation -->
-        <div class="card">
-            <h2>🔗 BTC-ETH Correlation</h2>
-            <div class="stat-row"><span class="stat-label">Correlation</span><span class="stat-value blue">0.622</span></div>
-            <div class="stat-row"><span class="stat-label">Lead-Lag</span><span class="stat-value">ETH leads by ~5s</span></div>
-            <div class="stat-row"><span class="stat-label">BTC Vol</span><span class="stat-value">3.68 bps</span></div>
-            <div class="stat-row"><span class="stat-label">ETH Vol</span><span class="stat-value">4.46 bps</span></div>
-            <div class="stat-row"><span class="stat-label">Intraday Imbalance</span><span class="stat-value">Americas bid-heavy</span></div>
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">Agentic Sciences</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="research.html">Research</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
         </div>
     </div>
+</nav>
 
-    <h2 class="section-title">🔑 Key Findings</h2>
-    <div class="findings">
-        <div class="finding">
-            <h3>1. Binance Dominance Confirmed</h3>
-            <p>Binance BTC spot spread at 0.0035 bps (minimum tick size). Market impact for $1M trade only 1.85 bps on spot, 0.95 bps on futures. 5 exchanges share the tightest spread tier.</p>
-        </div>
-        <div class="finding">
-            <h3>2. Persistent Backwardation in BTC/ETH Futures</h3>
-            <p>BTC futures consistently below spot by -4.66 bps (median over 13 days). ETH shows same pattern (-3.08 to -5.47 bps). Suggests structural short hedging demand or funding rate arbitrage pressure.</p>
-        </div>
-        <div class="finding">
-            <h3>3. ETH Leads BTC by ~5 Seconds</h3>
-            <p>Cross-correlation analysis shows ETH price changes lead BTC by approximately 1 snapshot (~5 seconds). Correlation = 0.622. May indicate information flow direction or large trader behavior.</p>
-        </div>
-        <div class="finding">
-            <h3>4. Regional Trading Session Effects</h3>
-            <p>European session (08-14 UTC): deepest order books ($36.6M). Americas session (14-21 UTC): bid-heavy imbalance (1.16). Spread remains constant at 0.0035 bps across all sessions.</p>
-        </div>
-        <div class="finding">
-            <h3>5. Extreme Exchange Fragmentation</h3>
-            <p>Tier-1 vs Tier-3 spread differs by 1000x (0.0035 vs 3923 bps). Depth ranges from $126M (BitForex) to $5K (Quoine). Cross-exchange arb opportunities: up to 9.3 bps.</p>
-        </div>
+<div class="page-header">
+    <div class="container">
+        <h1>Research Dashboard</h1>
+        <p>50 automated studies across 20+ financial databases · Generated Feb 28, 2026</p>
     </div>
+</div>
 
-    <h2 class="section-title">📊 Figures</h2>
-    <div class="figure-grid">
-        <div class="figure-card">
-            <img src="figures/full_spread_20260321.png" alt="Spread Comparison" loading="lazy">
-            <div class="caption">BTC Bid-Ask Spreads — 27 Exchanges (log scale)</div>
+<section class="section">
+    <div class="container">
+
+        <!-- Summary Stats -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="num">50</div>
+                <div class="label">Research Modules</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">20+</div>
+                <div class="label">Databases</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">100</div>
+                <div class="label">Figures</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">70 min</div>
+                <div class="label">Total Runtime</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">1925–2023</div>
+                <div class="label">Data Coverage</div>
+            </div>
         </div>
-        <div class="figure-card">
-            <img src="figures/full_depth_20260321.png" alt="Depth Profile" loading="lazy">
-            <div class="caption">Order Book Depth — Top 15 Exchanges</div>
+
+        <!-- EQUITIES & MARKET OVERVIEW -->
+        <div class="divider">
+            <h2>📈 Equities & Market Overview</h2>
+            <div class="line"></div>
         </div>
-        <div class="figure-card">
-            <img src="figures/basis_nearest_20260321.png" alt="Basis Analysis" loading="lazy">
-            <div class="caption">BTC Spot-Futures Basis (5,629 ticks, 13 days)</div>
+
+        <div class="study">
+            <h3><span class="id">R01</span> CRSP Market Overview <span class="runtime">56.5s</span></h3>
+            <div class="desc">4.9M observations, 36,892 securities, 1925–2022.</div>
+            <div class="finding">Mean monthly return 0.93%, skewness 1.78, kurtosis 15.1. Listed stocks peaked ~10,000. Market cap: $714T (2021) → $608T (2022).</div>
         </div>
-        <div class="figure-card">
-            <img src="figures/market_impact_20260321.png" alt="Market Impact" loading="lazy">
-            <div class="caption">Market Impact Curves — 5 Exchanges</div>
+
+        <div class="study">
+            <h3><span class="id">R03</span> Compustat Fundamentals <span class="runtime">103.4s</span></h3>
+            <div class="desc">857,983 firm-years, 42,114 firms, 1950–2021.</div>
+            <div class="finding">Median ROA declined from 7.0% (1950s) to ~0% (2020s). R&D intensity rose 2.2% → 4.7%. R&D missing for 78% of obs.</div>
         </div>
-        <div class="figure-card">
-            <img src="figures/eth_imbalance_20260321.png" alt="ETH + Imbalance" loading="lazy">
-            <div class="caption">ETH Basis + OB Imbalance Analysis</div>
+
+        <div class="study">
+            <h3><span class="id">R04</span> CRSP-Compustat Merged <span class="runtime">151.7s</span></h3>
+            <div class="desc">28,353 PERMNOs linked to 27,946 GVKEYs, 6.7M merged obs.</div>
+            <div class="finding">Median mktcap $125M vs mean $2,322M (extreme skew). Smallest quintile: 5.3% ann. vs largest: 16.4% — counter to traditional size premium.</div>
         </div>
-        <div class="figure-card">
-            <img src="figures/full_arb_heatmap_20260321.png" alt="Arb Heatmap" loading="lazy">
-            <div class="caption">Cross-Exchange Price Differences Heatmap</div>
+
+        <div class="study">
+            <h3><span class="id">R16</span> S&P 500 Index <span class="runtime">3.9s</span></h3>
+            <div class="desc">25,359 daily observations, 1926–2022.</div>
+            <div class="finding">Cumulative return 11,452×, 9.73% annualized. Best decade: 1950s (18.8%, Sharpe 1.62). Worst day: Black Monday −19.46%. Max DD: −84.8% (1929–1945).</div>
         </div>
-        <div class="figure-card">
-            <img src="figures/intraday_patterns_20260321.png" alt="Intraday Patterns" loading="lazy">
-            <div class="caption">BTC Intraday Patterns (Spread, Depth, Imbalance, Vol)</div>
+
+        <!-- FACTOR MODELS -->
+        <div class="divider">
+            <h2>🧮 Factor Models & Anomalies</h2>
+            <div class="line"></div>
         </div>
-        <div class="figure-card">
-            <img src="figures/btc_eth_cross_corr_single_day_20260321_single_day.png" alt="BTC-ETH Correlation" loading="lazy">
-            <div class="caption">BTC-ETH Cross-Correlation (Lead-Lag)</div>
+
+        <div class="study">
+            <h3><span class="id">R02</span> Fama-French Factors <span class="runtime">2.0s</span></h3>
+            <div class="desc">1,157 months, 1926–2022.</div>
+            <div class="finding">Momentum: highest Sharpe (0.476), then Market (0.436), Value (0.350), Size (0.208). HML-UMD correlation −0.415 (natural diversification).</div>
         </div>
+
+        <div class="study">
+            <h3><span class="id">R20</span> Size / Value / Momentum <span class="runtime">3.2s</span></h3>
+            <div class="desc">Decade-by-decade factor analysis, 5-factor model.</div>
+            <div class="finding">CMA highest Sharpe (0.50), RMW (0.44). Small-value: 19.5% ann. vs big-growth: 11.2%.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R30</span> Factor Zoo <span class="runtime">41.4s</span></h3>
+            <div class="desc">CAPM → FF3 spanning tests.</div>
+            <div class="finding">CAPM alpha 0.12%/mo (t=1.37, NS). FF3 eliminates alpha, R² jumps 82% → 96%. HML improved OOS; MKT/SMB degraded.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R31</span> Anomaly Decay <span class="runtime">39.2s</span></h3>
+            <div class="desc">Pre-2000 vs post-2000 factor performance.</div>
+            <div class="finding">Value Sharpe declined 35%, momentum declined 77%. Gradual decay (no structural break), consistent with increased quant adoption.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R40</span> Comprehensive Factor Model <span class="runtime">176.9s</span></h3>
+            <div class="desc">Spanning tests + OOS evaluation, all 4 standard factors.</div>
+            <div class="finding">All factors provide unique info. Momentum: highest unique alpha (11.6% ann.). OOS R² negative for MKT/SMB/HML — in-sample models degrade badly OOS.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R41</span> Fama-MacBeth Regressions <span class="runtime">—</span></h3>
+            <div class="desc">723 months, avg 951 stocks/month, full 2-pass cross-sectional pricing.</div>
+            <div class="finding">Size reversed: log(MktCap) positive (t=8.54). Anti-value: BM negative (t=−16.98). Momentum negative (t=−2.62). Avg cross-sectional R² = 5.0%. Portfolio-sort premia may not survive multivariate controls.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R42</span> Industry Momentum <span class="runtime">—</span></h3>
+            <div class="desc">6-month formation / 1-month holding, 69 SIC industries, 1,155 months.</div>
+            <div class="finding">Winner-loser spread: 0.14%/mo (t=0.38, NS). Industry rotation does not reliably add value — unlike stock-level momentum.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R46</span> Term Structure of Equity Risk <span class="runtime">—</span></h3>
+            <div class="desc">Variance ratios from daily FF factor data, 25,378 obs, 1926–2022.</div>
+            <div class="finding">All factors exhibit momentum at long horizons. HML strongest (VR=1.91 at 12mo). UMD strongest daily autocorrelation (0.151).</div>
+        </div>
+
+        <!-- ANALYSTS & EARNINGS -->
+        <div class="divider">
+            <h2>📊 Analysts & Earnings</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R05</span> IBES Analyst Forecasts <span class="runtime">533.1s</span></h3>
+            <div class="desc">20M forecasts, 26,857 analysts, 13,826 firms.</div>
+            <div class="finding">56.4% overshoot actual. Median abs error improved 1980s→1990s ($0.35→$0.22) then worsened to $0.53 (2020s). Coverage peaked ~6,600 analysts (2015).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R21</span> Earnings Surprises <span class="runtime">146.6s</span></h3>
+            <div class="desc">118,225 IBES-CRSP merged obs, 1983–2022.</div>
+            <div class="finding">57.4% below consensus. Q5-Q1 surprise spread 269%. High forecast dispersion → 2.7× surprise volatility. Persistent PEAD confirmed.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R35</span> Earnings Management <span class="runtime">116.7s</span></h3>
+            <div class="desc">Modified Jones Model, 148,062 industry-year obs.</div>
+            <div class="finding">48.9% income-increasing / 51.1% decreasing. Absolute DA peaked in 2000s. Benford's Law rejects null (χ²=32.4) — digit manipulation evidence.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R36</span> Analyst Herding <span class="runtime">246.3s</span></h3>
+            <div class="desc">5M IBES forecasts, 3,793 stocks, 18,129 analysts.</div>
+            <div class="finding">Herding ratio 1.17 — actually anti-herding (late forecasters are bolder). Dispersion narrows approaching announcement (information convergence).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R43</span> Earnings Quality Composite <span class="runtime">—</span></h3>
+            <div class="desc">4-dimension EQ score (accruals quality, persistence, smoothness, loss recognition), 29,136 firms.</div>
+            <div class="finding">Q1 (highest quality): 17.0% ann. vs Q5 (lowest): 7.1% → spread −9.9pp. Component correlations near zero — each dimension captures distinct info. EQ is a priced risk factor.</div>
+        </div>
+
+        <!-- INSTITUTIONAL & INSIDER -->
+        <div class="divider">
+            <h2>🏦 Institutional & Insider Trading</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R06</span> Insider Trading <span class="runtime">336.6s</span></h3>
+            <div class="desc">5M records, 1988–2011.</div>
+            <div class="finding">Sales dominate 4:1 (2M sales vs 480K purchases). CEOs: 17.3%. Median transaction $20K vs mean $8.8M (extreme skew).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R07</span> Institutional Holdings (13F) <span class="runtime">112.8s</span></h3>
+            <div class="desc">11,806 managers, 1978–2021.</div>
+            <div class="finding">Average stock held by 68 institutions (median 16). Each manager holds 711 positions (median 334).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R22</span> Insider vs Institutional <span class="runtime">197.6s</span></h3>
+            <div class="desc">2.5M insider trades vs 394K institutional quarterly reports.</div>
+            <div class="finding">Insiders net sellers (buy/sell 0.45), event-driven. Institutions make small quarterly adjustments. Different information sets confirmed.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R37</span> Institutional Trading Impact <span class="runtime">162.7s</span></h3>
+            <div class="desc">2.5M S34 records, 945 managers, 8,376 stocks.</div>
+            <div class="finding">Most positions unchanged each quarter (median Δ = 0%). Herding measure 0.13; 46.1% of stock-quarters show high herding (>0.10). More pronounced in smaller stocks.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R44</span> Insider Signal Returns <span class="runtime">—</span></h3>
+            <div class="desc">Module did not complete execution.</div>
+        </div>
+
+        <!-- OPTIONS & DERIVATIVES -->
+        <div class="divider">
+            <h2>📉 Options & Derivatives</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R08</span> Options Market (OptionMetrics) <span class="runtime">187.9s</span></h3>
+            <div class="desc">26 years (1996–2021), 500K records/year.</div>
+            <div class="finding">Mean IV 46.7%. IV peaked 2000 (64.3%), lowest 2005 (31.1%). Perfect 50/50 call-put split in standardized data.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R23</span> Option Implied Volatility <span class="runtime">62.9s</span></h3>
+            <div class="desc">3.4M option records, 1996–2021.</div>
+            <div class="finding">Mean IV 44.4%, significant right skew (1.95). Puts have 0.45pp higher IV than calls (downside protection demand). IV term structure slopes downward.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R38</span> Option Strategy Backtest <span class="runtime">69.2s</span></h3>
+            <div class="desc">4 strategies, 30-day ATM options, 201 securities, 2010–2020.</div>
+            <div class="finding"><strong>Protective Put: Sharpe 0.573 (best)</strong>. Covered call: +13 bps at cost of +1.6% vol. Short straddle: −0.3% ann., kurtosis 20.2 (tail risk).</div>
+        </div>
+
+        <!-- FIXED INCOME -->
+        <div class="divider">
+            <h2>🏛️ Fixed Income</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R09</span> Corporate Bonds (TRACE) <span class="runtime">151.0s</span></h3>
+            <div class="desc">805,241 bonds, 2002–2022.</div>
+            <div class="finding">Mean price 101.15% par, yield 4.55%. Sell-side: 32.7% of volume.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R12</span> Municipal Bonds (MSRB) <span class="runtime">103.1s</span></h3>
+            <div class="desc">2.5M transactions, 2005–2022.</div>
+            <div class="finding">Customer sales 44.4%, inter-dealer 33.5%. Median par $30K. Estimated median dealer markup $0.40. Mean coupon 4.25%, yield 2.96%.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R17</span> Treasury (GovPX) <span class="runtime">16.6s</span></h3>
+            <div class="desc">800K quotes, 1993–2007.</div>
+            <div class="finding">Mean spread 2.75 bps. Declined from 3.6¢ (1993) to 2.0¢ (1998). Negative autocorrelation (−0.10 to −0.21) confirms bid-ask bounce.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R24</span> Bond-Equity Linkage <span class="runtime">86.0s</span></h3>
+            <div class="desc">TRACE-CRSP 6-digit CUSIP match.</div>
+            <div class="finding">Only 1,352 overlapping issuers (5.8%). These firms avg 15.8 bonds each — larger, more established subset. Mean equity RV 41.2%.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R33</span> Credit Risk Spreads <span class="runtime">133.4s</span></h3>
+            <div class="desc">TRACE + Compustat merged, 16.7M obs.</div>
+            <div class="finding">Mean leverage 0.61, rising from 0.48 (1960s) to 0.64 (2000s). Credit spreads increase with lower ratings and higher leverage.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R32</span> High-Frequency Treasury <span class="runtime">50.9s</span></h3>
+            <div class="desc">GovPX tick data 1998/2002/2006, 3M observations.</div>
+            <div class="finding">U-shaped intraday activity. Bid-ask bounce: autocorrelation −0.47 (1998) → −0.31 (2006), diminishing as spreads narrow.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R49</span> Treasury-Equity Correlation <span class="runtime">—</span></h3>
+            <div class="desc">S&P 500 vs risk-free, 25,210 obs, 1926–2022.</div>
+            <div class="finding">Unconditional correlation 0.010 (near zero). But varies: positive 1950s/1970s, negative 2020s (−0.108). Negative-corr regimes: higher equity Sharpe (0.90 vs 0.60).</div>
+        </div>
+
+        <!-- CORPORATE & GOVERNANCE -->
+        <div class="divider">
+            <h2>🏢 Corporate & Governance</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R11</span> DealScan Lending <span class="runtime">26.2s</span></h3>
+            <div class="desc">396,004 facilities, 68,763 covenants.</div>
+            <div class="finding">Syndication dominant (75.2%). Mean spread 232 bps, median maturity 60 months. Most common covenant: Max Debt/EBITDA (15,960).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R13</span> Executive Compensation <span class="runtime">34.9s</span></h3>
+            <div class="desc">333,179 exec-years, 3,961 firms, 1992–2022.</div>
+            <div class="finding">CEO median $8.0M (2022). Stock awards dominant ($5.0M). Female CEOs earn higher median ($3.9M vs $3.3M) but only 3.2% of obs. Highest: Charles Wang $655M (1998).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R14</span> Audit Quality <span class="runtime">42.1s</span></h3>
+            <div class="desc">278,074 audit-fee obs, 1996–2024.</div>
+            <div class="finding">Audit fees rose $426K → $1.99M. Big 4: 66.3% share, $1.87M mean vs non-Big 4 $184K. SOX reduced non-audit ratio 36.3% → 15.0%. Restatement rate 6.7%.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R28</span> Financial Distress <span class="runtime">133.1s</span></h3>
+            <div class="desc">Altman Z-Score, 857,318 firm-years.</div>
+            <div class="finding">Original Z: 90.1% in distress zone. Modified Z'' (Altman 1993): 70.9% distressed, 22.2% safe. Finance sector: 97.7% distressed (original).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R29</span> Merger Arbitrage <span class="runtime">29.4s</span></h3>
+            <div class="desc">12,818 potential M&A events, 642 target firms.</div>
+            <div class="finding">Mean announcement return 32.4%. Pre-event run-up begins day −20 (−8.5% CAR), suggesting information leakage.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R34</span> Governance & Returns <span class="runtime">37.5s</span></h3>
+            <div class="desc">GMI Ratings, 15,561 obs, 200+ governance variables, 2004–2018.</div>
+            <div class="finding">CEO-Chair duality in 64.3% of firms. No single composite governance score available in dataset.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R48</span> CEO Pay & Performance <span class="runtime">—</span></h3>
+            <div class="desc">54,123 CEO-years merged with Compustat, 1992–2022.</div>
+            <div class="finding">Median CEO pay: $1.3M (1995) → $8.0M (2022), +360%. Pay-performance β=1.46 (R²=2.3%). Higher-paid CEOs → better next-year ROA (Q5: 4.7% vs Q1: −2.1%). Low R² = size/industry dominate.</div>
+        </div>
+
+        <!-- ETFs & FUNDS -->
+        <div class="divider">
+            <h2>💼 ETFs & Mutual Funds</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R10</span> ETF Flows <span class="runtime">3.3s</span></h3>
+            <div class="desc">4,684 ETF tickers, 2012–2023.</div>
+            <div class="finding">AUM $19B → $97B. Largest daily inflow: $5.8B into SPY (Jun 2022). Top-10 concentration declined 32% → 14%.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R25</span> ETF vs Mutual Funds <span class="runtime">11.8s</span></h3>
+            <div class="desc">ETF + MF comparison, 2002–2022.</div>
+            <div class="finding">ETFs: 1,604 → 3,090 tickers (+93%). MFs: 5,562 → 1,975 (−64%). MF median expense ratio: 1.30% → 0.75% (fee compression from passive competition).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R45</span> Mutual Fund Persistence <span class="runtime">—</span></h3>
+            <div class="desc">9,275 funds, 1.2M fund-month obs, 1962–2021.</div>
+            <div class="finding">Transition matrix indistinguishable from random (diagonal avg 0.199 vs random 0.200). Q5-Q1 future alpha spread: −0.27% (≈zero). Past performance does NOT predict future. EMH supported.</div>
+        </div>
+
+        <!-- MARKET MICROSTRUCTURE -->
+        <div class="divider">
+            <h2>🔬 Market Microstructure</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R27</span> Equity Microstructure <span class="runtime">58.9s</span></h3>
+            <div class="desc">5M CRSP daily records.</div>
+            <div class="finding">Median spread declined 73.6% (3.1% → 0.8%). Decimalization (2001) = primary structural break. Higher spreads ↔ higher volatility.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R47</span> Liquidity Premium <span class="runtime">—</span></h3>
+            <div class="desc">Amihud illiquidity quintiles, 1.37M stock-months, 1926–2022.</div>
+            <div class="finding">Q5 (illiquid): 2.63%/mo vs Q1 (liquid): 1.15%/mo → spread 1.48%/mo (t=3.72, 17.7% ann.). But FF3 alpha only 0.56% (NS) — size/value explain most. Sharpe peaks at Q3, not Q5.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R18</span> Bank Branching <span class="runtime">47.6s</span></h3>
+            <div class="desc">FDIC, 751,571 branch-years, 1994–2002.</div>
+            <div class="finding">Branches +6.5% while institutions −27.2% (consolidation). Branches/institution: 6.3 → 9.1. BofA led with 2,740 branches.</div>
+        </div>
+
+        <!-- CRYPTO -->
+        <div class="divider">
+            <h2>₿ Crypto & Cross-Asset</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R15</span> Crypto Order Book <span class="runtime">2.8s</span></h3>
+            <div class="desc">6 instruments, 4 exchanges, 2017–2023.</div>
+            <div class="finding">Mean spread 7.3 bps (median 2.8). Bybit tightest (1.0 bps). BTC depth $6.3M on Bybit. Depth imbalance slightly negative (−0.003).</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R19</span> Kaiko Crypto Inventory <span class="runtime">18.5s</span></h3>
+            <div class="desc">8,661 trade files (1,860 GB), 64 exchanges.</div>
+            <div class="finding">Spot 5,722 files, futures 1,394, options 833, perps 712. OKEx leads (1,887 files). Order book: 5,010 GB across ~3M files.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R26</span> Cross-Asset Correlations <span class="runtime">25.0s</span></h3>
+            <div class="desc">Equity, S&P 500, crypto daily returns.</div>
+            <div class="finding"><strong>Crypto-equity correlation: 0.016 (near zero).</strong> Crypto: 84.14% ann., Sharpe 0.40 (0.33%/day, 13.3% daily vol). Diversification ratio 0.889.</div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R39</span> Crypto-Traditional Linkage <span class="runtime">2.6s</span></h3>
+            <div class="desc">1,613 overlapping trading days.</div>
+            <div class="finding"><strong>BTC is NOT a safe haven.</strong> Mean BTC-SPX rolling corr: −0.04. During equity stress: crypto returns −5.5% (vs market −2.5%). Optimal allocation to crypto: 0%.</div>
+        </div>
+
+        <!-- DATA QUALITY -->
+        <div class="divider">
+            <h2>🔍 Data Quality & Infrastructure</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="study">
+            <h3><span class="id">R50</span> Data Quality Audit <span class="runtime">—</span></h3>
+            <div class="desc">Comprehensive audit across all 20+ databases.</div>
+            <div class="finding">Cross-database consistency checks, missing data patterns, survivorship bias assessment, and data coverage gaps documented.</div>
+        </div>
+
     </div>
+</section>
 
-    <script>
-        document.getElementById('updateTime').textContent = new Date().toLocaleString('en-US', {
-            timeZone: 'America/New_York',
-            year: 'numeric', month: 'short', day: 'numeric',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
-        }) + ' EDT';
-    </script>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Agentic Sciences</div>
+        <div class="footer-links"><a href="https://github.com/Agentic-Sciences">GitHub</a></div>
+    </div>
+    <div class="footer-copy">© 2026 Agentic Sciences · Auto-Research Engine v1 · 50 Modules · 70 min total runtime</div>
+</footer>
+
 </body>
 </html>

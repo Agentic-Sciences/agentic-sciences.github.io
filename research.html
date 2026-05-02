@@ -35,6 +35,7 @@
             <a href="index.html">Home</a>
             <a href="architecture.html">Architecture</a>
             <a href="research.html" class="active">Research</a>
+            <a href="dashboard.html">Dashboard</a>
             <a href="crypto-microstructure.html">Crypto Micro</a>
             <a href="https://agentic-sciences.github.io/aimem/">AIMEM</a>
         </div>
@@ -158,6 +159,48 @@
         </div>
 
         <div class="project">
+            <h3>Slippage-at-Risk (SaR): Multi-Exchange Liquidity Risk</h3>
+            <div class="meta">Kaiko Order Book Snapshots · 5 Exchanges · 8 Time Periods · 2,600+ Token-Period Combinations · 2021–2026</div>
+            <p class="desc">Extension of the SaR framework (arXiv:2603.09164) to multi-exchange, multi-period analysis. Quantifying exchange-level liquidity risk through order book slippage, concentration adjustments, and stress amplification across bull, bear, and crisis regimes.</p>
+            <div class="finding"><strong>Key finding:</strong> Exchange matters more than market regime: Binance SaR = 37–66 bps vs OKX = 240–430 bps (6–8× worse). FTX insurance fund need peaked during bull market ($26K BTC), pre-warning collapse. Stress amplification: Binance 1.5×, FTX 2–3× (self-destructive). Concentration adds +35–90% to SaR.</div>
+            <div class="materials">
+                <a href="https://qihongruan.github.io/sar-research/">🌐 Interactive Site</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <h3>Perpetual Futures Funding Rate Predictability</h3>
+            <div class="meta">Hyperliquid API · OKX API · 24,350 Hourly BTC Records · 50 Coins · 2023–2026</div>
+            <p class="desc">Cross-exchange funding rate dynamics and predictability analysis. Hourly funding rate data from Hyperliquid (richest dataset: BTC 24K records spanning 3 years) and OKX. DEX vs CEX funding rate comparison, cross-coin correlation structure, and short-term predictability signals.</p>
+            <div class="finding"><strong>Key finding:</strong> Funding rates show significant mean-reversion at 8–24h horizon. DEX rates more volatile but faster to reprice. Cross-coin FR correlation spikes during liquidation cascades.</div>
+            <div class="materials">
+                <a href="figures/fr_research_predictability.png">📊 Predictability</a>
+                <a href="figures/fr_research_cross_coin.png">📊 Cross-Coin</a>
+                <a href="figures/fr_research_dex_vs_cex.png">📊 DEX vs CEX</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <h3>BTC Microstructure: Order Book Dynamics</h3>
+            <div class="meta">Kaiko Level 2 Data · 27M Raw Records · 839 Snapshots · Binance · 2023</div>
+            <p class="desc">Tick-level order book analysis of BTC-USDT on Binance. Order flow imbalance, bid-ask spread dynamics, depth profiles, and intraday patterns from high-frequency limit order book data.</p>
+            <div class="finding"><strong>Key finding:</strong> Order book imbalance predicts short-term returns (t = −104.25). Depth recovery after large trades takes 2–5 minutes. Spread widens systematically during Asian session close.</div>
+            <div class="materials">
+                <a href="assets/papers/btc_microstructure.pdf">📄 Paper</a>
+            </div>
+        </div>
+
+        <div class="project">
+            <h3>Polymarket Signal Analysis</h3>
+            <div class="meta">Dune Analytics · Polymarket CLOB · Multi-Market · March 2026</div>
+            <p class="desc">Systematic signal extraction from Polymarket prediction markets. Combining order flow, price momentum, and Reverse FLB (Favorite-Longshot Bias) signals for multi-market analysis.</p>
+            <div class="finding"><strong>Key finding:</strong> Reverse FLB consistently detected — favorites systematically overpriced. All signals point SHORT YES (buy NO) across analyzed markets. Consistent with prediction market inefficiency literature.</div>
+            <div class="materials">
+                <a href="assets/papers/prediction_market_microstructure.pdf">📄 Paper</a>
+            </div>
+        </div>
+
+        <div class="project">
             <h3>Post-Earnings Announcement Drift (PEAD)</h3>
             <div class="meta">IBES Consensus · CRSP Daily Returns · 27,318 Events · 2015–2024</div>
             <p class="desc">Classic PEAD analysis: sorting earnings events by standardized surprise (actual vs. consensus EPS) and tracking cumulative abnormal returns over 60 trading days.</p>
@@ -174,6 +217,30 @@
             <div class="finding"><strong>Key finding:</strong> Same-day Q5−Q1 spread = +1.24%. Next-day L/S = +0.15%. Negative news shows reversal: −0.38% same-day → +0.17% next-day (overreaction).</div>
             <div class="materials">
                 <a href="assets/papers/ravenpack_sentiment_returns.pdf">📄 Paper</a>
+            </div>
+        </div>
+
+        <!-- AUTOMATED RESEARCH -->
+        <div class="divider">
+            <h2>🤖 Automated Research Engine</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="project">
+            <h3>WRDS Auto-Research Engine: 50 Systematic Studies</h3>
+            <div class="meta">CRSP · Compustat · IBES · OptionMetrics · TRACE · DealScan · MSRB · Kaiko · 272 WRDS Libraries · 100 Figures · 51 Reports</div>
+            <p class="desc">Fully autonomous research engine that wrote, executed, and analyzed 50 systematic studies across WRDS databases. Each study includes a Python script, generated figures, and a comprehensive report. Topics span market microstructure, factor models, options, corporate bonds, ETFs, insider trading, earnings quality, and crypto-equity linkages.</p>
+            <div class="finding"><strong>Highlights:</strong><br>
+                • R01–R05: Market overview, Fama-French factors, fundamentals, merged CRSP-Compustat, analyst forecasts<br>
+                • R08: Options market — Protective Put Sharpe 0.573 (best), Short Straddle −0.064 (worst)<br>
+                • R15/R19: Crypto order book depth, Kaiko trade analysis<br>
+                • R26: Cross-asset — BTC-SPX correlation mean −0.04, negative 55% of time<br>
+                • R39: Crypto-equity linkage — BTC −5.5% vs market −2.5% during stress (not a hedge)<br>
+                • R41: Fama-MacBeth regressions — full 2-pass factor pricing<br>
+                • R50: Data quality audit across all databases
+            </div>
+            <div class="materials">
+                <a href="dashboard.html">📊 Full Dashboard (50 Studies)</a>
             </div>
         </div>
 
